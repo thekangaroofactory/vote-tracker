@@ -1,4 +1,16 @@
 
+#' Election Result
+#'
+#' @param data a data.frame
+#' 
+#' @details 
+#' `data` is a single row slice of summary
+#'
+#' @returns an HTML tag
+#' @export
+#'
+#' @examples
+#' election_result(data)
 
 election_result <- function(data){
   
