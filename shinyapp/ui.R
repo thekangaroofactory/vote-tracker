@@ -53,13 +53,13 @@ page_navbar(
             value = "home",
             title = "Accueil", 
             
-            h1("voteTracker"),
-            p("L'application présente les résultats des éléctions françaises à partir des données publiées sur data.gouv.fr")
             h1("vote", span(class = "text-secondary", "T", .noWS = "outside"), "racker"),
             p("L'application présente les résultats des élections françaises à partir des données publiées 
               par le Ministère de l'Intérieur et des Outre-mer, agrégées sur la plateforme", 
               a(href = "https://www.data.gouv.fr/", target = "_blank", "datagouv"), ".", br(),
               "Les données sont intérogées en temps réel, de sorte que la dernière mise à jour est reflétée à tout moment."),
+            
+            div(id = "dataset-meta"),
             
             div(id = "election-summary-placeholder"),
   ),
