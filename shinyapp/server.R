@@ -36,7 +36,18 @@ function(input, output, session) {
   
   observeEvent(input$global_nav, {
     
-    str(input$global_nav)
+    ui <- election_result(data = summary |>
+                             filter(id_election == "2017_pres_t1"))
+    
+    
+    nav_insert(id = "navbar",
+               nav = nav_panel(title = "Résultats",
+                               value = "result",
+                               ui),
+               target = "home",
+               position = "after",
+               select = TRUE)
+    
     
   })
   
