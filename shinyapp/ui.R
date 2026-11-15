@@ -6,13 +6,12 @@
 # -- Declare theme
 app_theme <- bs_theme(
   version = 5,
-  #bg = "#2d3037",
-  #fg = "#ececec",
-  primary = "#c09f7f",
-  #secondary = "#ececec",
-  base_font = font_google("Quicksand"),
+  bg = "#b59a85",
+  fg = "#000",
+  primary = "#654F3E",
+  secondary = "#ff8044",
+  base_font = font_google("Zen Maru Gothic"),
   font_scale = 17/16)
-
 
 # -- Define application UI
 page_navbar(
@@ -24,17 +23,21 @@ page_navbar(
   theme = app_theme,
   
   # -- Title
-  title = "xxx",
-  window_title = "xxx",
+  title = "voteTracker",
+  window_title = "voteTracker",
   
   # -- header
-  header = tags$head(),
+  header = tags$head(
+    
+    tags$link(rel = "stylesheet", type = "text/css", href = "./css/vote-tracker.css"),
+    
+  ),
   
   # -- footer
   fillable = FALSE,
   footer = p(class = "footer", 
-             paste("©", format(Sys.Date(), "%Y"), "xxx"), "|",
-             actionLink(inputId = "legal_notice", label = "legal notice", class = "ktag")),
+             paste("©", format(Sys.Date(), "%Y"), "voteTracker"), "|",
+             actionLink(inputId = "legal_notice", label = "mentions légales", class = "ktag")),
   
   
   # ----------------------------------------------------------------------------
@@ -44,7 +47,10 @@ page_navbar(
   # -- Home
   nav_panel(class = "p-5",
             value = "home",
-            title = "Home", 
+            title = "Accueil", 
+            
+            h1("voteTracker"),
+            p("L'application présente les résultats des éléctions françaises à partir des données publiées sur data.gouv.fr")
             
   ),
   
