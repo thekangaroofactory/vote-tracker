@@ -34,6 +34,7 @@ function(input, output, session) {
   # ////////////////////////////////////////////////////////////////////////////
   # Navigation
   
+  # open tab
   observeEvent(input$global_nav, {
     
     ui <- election_result(data = summary |>
@@ -48,6 +49,15 @@ function(input, output, session) {
                position = "after",
                select = TRUE)
     
+    
+  })
+  
+  
+  # close result
+  observeEvent(input$result_close, {
+    
+    nav_remove(id = "navbar",
+               target = "result")
     
   })
   

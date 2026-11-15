@@ -2,3 +2,9 @@
 .footer {
   font-size: 0.9rem;
 }
+
+
+.btn {
+  border-radius: 25px;
+  padding: 5px 20px;
+}
