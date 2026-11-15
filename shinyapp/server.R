@@ -61,6 +61,15 @@ function(input, output, session) {
   insertUI(selector = "#election-type-placeholder", 
            where = "beforeEnd", 
            ui)
+
+  # election year  
+  ui <- lapply(sort(unique(summary$election_year), decreasing = TRUE), 
+               \(x) a(href = "#", 
+                      onclick = sprintf("Shiny.setInputValue('global_nav', '%s', {priority: 'event'});", 
+                                        x), x))
   
+  insertUI(selector = "#election-year-placeholder", 
+           where = "beforeEnd", 
+           ui)
   
 }

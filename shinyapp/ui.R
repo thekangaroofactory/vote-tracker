@@ -66,7 +66,8 @@ page_navbar(
             h2("Par type"),
             div(id = "election-type-placeholder"),
             
-            h2("Par année")
+            h2("Par année"),
+            div(id = "election-year-placeholder")
             
   ),
   
