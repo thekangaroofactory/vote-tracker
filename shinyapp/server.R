@@ -53,12 +53,14 @@ function(input, output, session) {
                 sprintf("Mise à jour : %s", dataset_meta$last_update))
   
   # election types
-  unique(election_mapping$title)
+  ui <- lapply(unique(election_mapping$title), 
+               \(x) a(href = "#", 
+                      onclick = sprintf("Shiny.setInputValue('global_nav', '%s', {priority: 'event'});", 
+                                        x), x))
   
   insertUI(selector = "#election-type-placeholder", 
            where = "beforeEnd", 
-           a(href = "#", onclick = "Shiny.setInputValue('global_nav', 'bar', {priority: 'event'});", "text"))
-  
+           ui)
   
   
 }
