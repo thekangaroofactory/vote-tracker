@@ -30,6 +30,17 @@ function(input, output, session) {
   else
     warning("Error while retrieving data from data.gouv API", call. = F)
   
+  
+  # ////////////////////////////////////////////////////////////////////////////
+  # Navigation
+  
+  observeEvent(input$global_nav, {
+    
+    str(input$global_nav)
+    
+  })
+  
+  
   # ////////////////////////////////////////////////////////////////////////////
   # Update UI
   
