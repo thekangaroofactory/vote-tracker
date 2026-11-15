@@ -62,6 +62,12 @@ page_navbar(
             div(id = "dataset-meta"),
             
             div(id = "election-summary-placeholder"),
+            
+            h2("Par type"),
+            div(id = "election-type-placeholder"),
+            
+            h2("Par année")
+            
   ),
   
   # -- Spacing

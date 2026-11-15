@@ -51,4 +51,14 @@ function(input, output, session) {
   # last update
   shinyjs::html(id = "dataset-meta",
                 sprintf("Mise à jour : %s", dataset_meta$last_update))
+  
+  # election types
+  unique(election_mapping$title)
+  
+  insertUI(selector = "#election-type-placeholder", 
+           where = "beforeEnd", 
+           a(href = "#", onclick = "Shiny.setInputValue('global_nav', 'bar', {priority: 'event'});", "text"))
+  
+  
+  
 }
