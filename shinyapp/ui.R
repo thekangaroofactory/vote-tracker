@@ -72,7 +72,9 @@ page_navbar(
             
             # by year
             h2("Par année"),
-            div(id = "election-year-placeholder")
+            div(id = "election-year-placeholder",
+                div(id = "election-year"),
+                div(id = "election-year-content"))
             
   ),
   

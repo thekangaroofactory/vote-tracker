@@ -36,34 +36,33 @@ function(input, output, session) {
   
   # open tab
   observeEvent(input$global_nav, {
-    
-    cat(">> Event >> \n")
-    str(input$global_nav)
-    
+
+    # check name in list
     if(names(input$global_nav) == "type"){
       
       # prepare ui
-      e <- summary[summary$election_type_label %in% input$global_nav$type, ]
-      str(e)
+      df <- summary[summary$election_type_label %in% input$global_nav$type, ]
+      ui <- lapply(1:nrow(df), 
+                   \(x) a(href = "#", 
+                          onclick = sprintf("Shiny.setInputValue('global_nav', {id: '%s'}, {priority: 'event'});", 
+                                            df[x, ]$id_election), df[x, ]$election_title))
       
-      ui <- lapply(1:nrow(e), \(x) {
-        
-        x <- e[x, ]
-        str(x)
-        
-        a(href = "#", 
-          onclick = sprintf("Shiny.setInputValue('global_nav', {id: '%s'}, {priority: 'event'});", 
-                            x$id_election), x$election_title)
-      })
-      
-      
+      # update ui
       shinyjs::html(id = "election-type-content",
                     html = as.character(tagList(ui)))
       
     } else if(names(input$global_nav) == "year"){
       
+      # prepare ui
+      df <- summary[summary$election_year %in% input$global_nav$year, ]
+      ui <- lapply(1:nrow(df), 
+                   \(x) a(href = "#", 
+                          onclick = sprintf("Shiny.setInputValue('global_nav', {id: '%s'}, {priority: 'event'});", 
+                                            df[x, ]$id_election), df[x, ]$election_title))
       
-      
+      # update ui
+      shinyjs::html(id = "election-year-content",
+                    html = as.character(tagList(ui)))
       
     } else if(names(input$global_nav) == "id"){
       
@@ -116,10 +115,10 @@ function(input, output, session) {
   # election year  
   ui <- lapply(sort(unique(summary$election_year), decreasing = TRUE), 
                \(x) a(href = "#", 
-                      onclick = sprintf("Shiny.setInputValue('global_nav', '%s', {priority: 'event'});", 
+                      onclick = sprintf("Shiny.setInputValue('global_nav', {year: %i}, {priority: 'event'});", 
                                         x), x))
   
-  insertUI(selector = "#election-year-placeholder", 
+  insertUI(selector = "#election-year", 
            where = "beforeEnd", 
            ui)
   
