@@ -14,12 +14,9 @@
 
 election_result <- function(data){
   
-  # prepare
-  type <- election_mapping |> filter(type == data$election_type) |> pull("title")
-  
   # return ui
   div(
-    h2("Élection", type, data$election_year, paste0("(", toupper(data$election_tour), ")")),
+    h2(data$election_title),
     actionButton(inputId = "result_close", icon = icon("close"), "fermer"),
     
     p(paste0("Participation : ", data$ratio_votants_inscrits, "%"), br(),
