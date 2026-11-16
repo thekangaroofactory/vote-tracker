@@ -29,7 +29,10 @@ election_result <- function(id, data){
     h3("Filtres"),
     textInput(inputId = ns("commune_search"),
               label = "Commune"),
-    div(id = ns("commune-placeholder"))
+    div(id = ns("commune-placeholder")),
+    
+    h3("Résultats"),
+    div(id = ns("result-placeholder"))
     
   )
     
