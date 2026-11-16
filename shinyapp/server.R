@@ -58,12 +58,16 @@ function(input, output, session) {
       
     } else if(names(input$global_nav) == "id"){
       
-      ui <- election_result(data = summary |>
+      ui <- election_result(id = "foo",
+                            data = summary |>
                               filter(id_election == input$global_nav$id))
+      
+      module <- result_server(id = "foo")
       
       nav_insert(id = "navbar",
                  nav = nav_panel(title = "Résultats",
                                  value = "result",
+                                 class = "p-5",
                                  ui),
                  target = "home",
                  position = "after",
