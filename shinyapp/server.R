@@ -24,7 +24,7 @@ function(input, output, session) {
   url <- paste(base, endpoint, id, sep = "/")
   
   # call API
-  res <- iker::call_api(url, header = list())
+  res <- iker::with_cache(iker::call_api(url, header = list()), encrypt = FALSE)
   if(res$status_code == 200)
     dataset_meta <- jsonlite::fromJSON(res$content)
   else
