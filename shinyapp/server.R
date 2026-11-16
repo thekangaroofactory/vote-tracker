@@ -41,11 +41,7 @@ function(input, output, session) {
     if(names(input$global_nav) == "type"){
       
       # prepare ui
-      df <- summary[summary$election_type_label %in% input$global_nav$type, ]
-      ui <- lapply(1:nrow(df), 
-                   \(x) a(href = "#", 
-                          onclick = sprintf("Shiny.setInputValue('global_nav', {id: '%s'}, {priority: 'event'});", 
-                                            df[x, ]$id_election), df[x, ]$election_title))
+      ui <- election_link(summary[summary$election_type_label %in% input$global_nav$type, ])
       
       # update ui
       shinyjs::html(id = "election-type-content",
@@ -54,11 +50,7 @@ function(input, output, session) {
     } else if(names(input$global_nav) == "year"){
       
       # prepare ui
-      df <- summary[summary$election_year %in% input$global_nav$year, ]
-      ui <- lapply(1:nrow(df), 
-                   \(x) a(href = "#", 
-                          onclick = sprintf("Shiny.setInputValue('global_nav', {id: '%s'}, {priority: 'event'});", 
-                                            df[x, ]$id_election), df[x, ]$election_title))
+      ui <- election_link(summary[summary$election_year %in% input$global_nav$year, ])
       
       # update ui
       shinyjs::html(id = "election-year-content",
