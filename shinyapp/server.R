@@ -37,18 +37,47 @@ function(input, output, session) {
   # open tab
   observeEvent(input$global_nav, {
     
-    ui <- election_result(data = summary |>
-                             filter(id_election == "2017_pres_t1"))
+    cat(">> Event >> \n")
+    str(input$global_nav)
     
-    
-    nav_insert(id = "navbar",
-               nav = nav_panel(title = "Résultats",
-                               value = "result",
-                               ui),
-               target = "home",
-               position = "after",
-               select = TRUE)
-    
+    if(names(input$global_nav) == "type"){
+      
+      # prepare ui
+      e <- summary[summary$election_type_label %in% input$global_nav$type, ]
+      str(e)
+      
+      ui <- lapply(1:nrow(e), \(x) {
+        
+        x <- e[x, ]
+        str(x)
+        
+        a(href = "#", 
+          onclick = sprintf("Shiny.setInputValue('global_nav', {id: '%s'}, {priority: 'event'});", 
+                            x$id_election), x$election_title)
+      })
+      
+      
+      shinyjs::html(id = "election-type-content",
+                    html = as.character(tagList(ui)))
+      
+    } else if(names(input$global_nav) == "year"){
+      
+      
+      
+      
+    } else if(names(input$global_nav) == "id"){
+      
+      ui <- election_result(data = summary |>
+                              filter(id_election == input$global_nav$id))
+      
+      nav_insert(id = "navbar",
+                 nav = nav_panel(title = "Résultats",
+                                 value = "result",
+                                 ui),
+                 target = "home",
+                 position = "after",
+                 select = TRUE)
+    }
     
   })
   
@@ -74,12 +103,13 @@ function(input, output, session) {
                 sprintf("Mise à jour : %s", dataset_meta$last_update))
   
   # election types
-  ui <- lapply(unique(election_mapping$title), 
+  # cant / dpmt will send two events from the same click
+  ui <- lapply(unique(summary$election_type_label), 
                \(x) a(href = "#", 
-                      onclick = sprintf("Shiny.setInputValue('global_nav', '%s', {priority: 'event'});", 
+                      onclick = sprintf("Shiny.setInputValue('global_nav', {type: '%s'}, {priority: 'event'});", 
                                         x), x))
   
-  insertUI(selector = "#election-type-placeholder", 
+  insertUI(selector = "#election-type", 
            where = "beforeEnd", 
            ui)
 

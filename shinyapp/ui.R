@@ -53,19 +53,24 @@ page_navbar(
             value = "home",
             title = "Accueil", 
             
+            # intro
             h1("vote", span(class = "text-secondary", "T", .noWS = "outside"), "racker"),
             p("L'application présente les résultats des élections françaises à partir des données publiées 
               par le Ministère de l'Intérieur et des Outre-mer, agrégées sur la plateforme", 
               a(href = "https://www.data.gouv.fr/", target = "_blank", "datagouv"), ".", br(),
               "Les données sont intérogées en temps réel, de sorte que la dernière mise à jour est reflétée à tout moment."),
             
+            # dataset
             div(id = "dataset-meta"),
-            
             div(id = "election-summary-placeholder"),
-            
+
+            # by types            
             h2("Par type"),
-            div(id = "election-type-placeholder"),
+            div(id = "election-type-placeholder",
+                div(id = "election-type"),
+                div(id = "election-type-content")),
             
+            # by year
             h2("Par année"),
             div(id = "election-year-placeholder")
             
