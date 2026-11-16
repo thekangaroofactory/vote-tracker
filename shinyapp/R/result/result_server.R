@@ -1,6 +1,6 @@
 
 
-result_server <- function(id) {
+result_server <- function(id, election) {
   moduleServer(id, function(input, output, session) {
     
     # //////////////////////////////////////////////////////////////////////////
@@ -18,7 +18,7 @@ result_server <- function(id) {
     
     # read data
     communes <- arrow::read_parquet(url, col_select = all_of(colums)) |> 
-      filter(id_election == "2026_muni_t2")
+      filter(id_election == election)
     
 
     # read data
@@ -38,7 +38,7 @@ result_server <- function(id) {
     
     # read data
     result <- arrow::read_parquet(url, col_select = all_of(colums)) |> 
-      filter(id_election == "2026_muni_t2")
+      filter(id_election == election)
     
     
     # //////////////////////////////////////////////////////////////////////////

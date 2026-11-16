@@ -62,7 +62,7 @@ function(input, output, session) {
                             data = summary |>
                               filter(id_election == input$global_nav$id))
       
-      module <- result_server(id = "foo")
+      module <- result_server(id = "foo", election = input$global_nav$id)
       
       nav_insert(id = "navbar",
                  nav = nav_panel(title = "Résultats",
