@@ -116,7 +116,13 @@ result_server <- function(id, election) {
       # update UI
       insertUI(selector = paste0("#", ns("result-placeholder")),
                where = "beforeEnd",
-               ui = div(id = ns("result-content"), res_commune$votants))
+               ui = div(id = ns("result-content"), 
+                        "Inscrits :", res_commune$inscrits,
+                        "Votants :", res_commune$votants,
+                        "Abstentions :", res_commune$abstentions,
+                        "Nuls", res_commune$nuls,
+                        "Blancs", res_commune$blancs,
+                        "Exprimés", res_commune$exprimes))
       
       # get contour
       contour_sf <- st_read(contour_commune(input$select_commune), quiet = TRUE)
