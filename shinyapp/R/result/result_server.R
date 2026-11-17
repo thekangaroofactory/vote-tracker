@@ -60,7 +60,7 @@ result_server <- function(id, election) {
       
       # search
       res <- communes |> 
-        filter(grepl(input$commune_search, libelle_commune, ignore.case = TRUE))
+        filter(grepl(paste0("^", input$commune_search), libelle_commune, ignore.case = TRUE))
       
       # update choices
       insertUI(selector = paste0("#", ns("commune-placeholder")),
