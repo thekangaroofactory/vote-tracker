@@ -6,7 +6,7 @@
 # -- Declare theme
 app_theme <- bs_theme(
   version = 5,
-  bg = "#b59a85",
+  bg = "#bea795",
   fg = "#000",
   primary = "#654F3E",
   secondary = "#ff8044",
@@ -58,7 +58,7 @@ page_navbar(
             p("L'application présente les résultats des élections françaises à partir des données publiées 
               par le Ministère de l'Intérieur et des Outre-mer, agrégées sur la plateforme", 
               a(href = "https://www.data.gouv.fr/", target = "_blank", "datagouv"), ".", br(),
-              "Les données sont intérogées en temps réel, de sorte que la dernière mise à jour est reflétée à tout moment."),
+              "..."),
             
             # dataset
             div(id = "dataset-meta"),
