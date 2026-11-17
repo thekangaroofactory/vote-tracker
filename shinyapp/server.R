@@ -58,12 +58,14 @@ function(input, output, session) {
       
     } else if(names(input$global_nav) == "id"){
       
-      ui <- election_result(id = "foo",
+      ui <- election_result(id = "result",
                             data = summary |>
                               filter(id_election == input$global_nav$id))
       
-      module <- result_server(id = "foo", election = input$global_nav$id)
+      # call module server
+      result_server(id = "result", election = input$global_nav$id)
       
+      # update ui
       nav_insert(id = "navbar",
                  nav = nav_panel(title = "Résultats",
                                  value = "result",
@@ -80,8 +82,12 @@ function(input, output, session) {
   # close result
   observeEvent(input$result_close, {
     
+    # drop ui
     nav_remove(id = "navbar",
                target = "result")
+    
+    # cleanup module
+    session$destroy("result")
     
   })
   
