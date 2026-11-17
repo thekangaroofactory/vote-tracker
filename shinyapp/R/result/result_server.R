@@ -65,17 +65,20 @@ result_server <- function(id, election) {
       res <- communes |> 
         filter(grepl(paste0("^", input$commune_search), libelle_commune, ignore.case = TRUE))
       
-      # update choices
-      insertUI(selector = paste0("#", ns("commune-placeholder")),
-               where = "beforeEnd",
-               ui = apply(res, 
-                          MARGIN = 1, 
-                          FUN = \(x)
-                           a(href = "#", 
-                             onclick = sprintf("Shiny.setInputValue('%s', '%s', {priority: 'event'});", 
-                                               ns("select_commune"), 
-                                               x[['code_commune']]),
-                             x[['libelle_commune']])))
+      # secure from empty search result
+      if(nrow(res))
+        
+        # update choices
+        insertUI(selector = paste0("#", ns("commune-placeholder")),
+                 where = "beforeEnd",
+                 ui = apply(res, 
+                            MARGIN = 1, 
+                            FUN = \(x)
+                            a(href = "#", 
+                              onclick = sprintf("Shiny.setInputValue('%s', '%s', {priority: 'event'});", 
+                                                ns("select_commune"), 
+                                                x[['code_commune']]),
+                              x[['libelle_commune']])))
       
     }, ignoreInit = TRUE)
     
