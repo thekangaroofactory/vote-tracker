@@ -27,7 +27,7 @@ contour_commune <- function(code){
 
   # return
   if(res$status_code == 200)
-    jsonlite::fromJSON(res$content)
+    res$content
   else NULL
 
 }
