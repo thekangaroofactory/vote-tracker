@@ -52,7 +52,7 @@ result_server <- function(id, election) {
     
     # init map
     output$map <- renderMaplibre({
-      maplibre(bounds = NULL,
+      maplibre(bounds = c(-5.0, 42.5, 9.56, 51.15),
                fitBoundsOptions = list(
                  padding = list(top = 40, bottom = 40, left = 40, right = 40))) |> 
         add_fill_layer(id = "contour",
@@ -126,10 +126,7 @@ result_server <- function(id, election) {
         set_source(layer_id = "contour", source = contour_sf) |>
         fit_bounds(contour_sf, 
                    animate = TRUE, 
-                   fitBoundsOptions = list(padding = list(top = 40, 
-                                                          bottom = 40, 
-                                                          left = 40, 
-                                                          right = 40)))
+                   padding = 40)
       
     })
     
