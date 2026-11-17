@@ -111,8 +111,9 @@ result_server <- function(id, election) {
       
       # map
       output$map <- renderMaplibre({
-        maplibre() |> 
-          fit_bounds(contour_sf, animate = TRUE) |> 
+        maplibre(bounds = contour_sf,
+                 fitBoundsOptions = list(
+                   padding = list(top = 40, bottom = 40, left = 40, right = 40))) |> 
           add_fill_layer(id = "nc_data",
                          source = contour_sf,
                          fill_color = "blue",
