@@ -17,8 +17,10 @@ result_server <- function(id, election) {
                 "libelle_commune")
     
     # read data
-    communes <- arrow::read_parquet(url, col_select = all_of(colums)) |> 
-      filter(id_election == election)
+    communes <- arrow::open_dataset(url) |>
+      select(all_of(colums)) |> 
+      filter(id_election == election) |>
+      collect()
     
 
     # read data
@@ -37,7 +39,8 @@ result_server <- function(id, election) {
                 "abstentions")
     
     # read data
-    result <- arrow::read_parquet(url, col_select = all_of(colums)) |> 
+    result <- arrow::open_dataset(url) |>
+      select(all_of(colums)) |>
       filter(id_election == election)
     
     
@@ -86,7 +89,10 @@ result_server <- function(id, election) {
         group_by(code_commune) |>
         
         # sum all numeric columns
-        summarise(across(where(is.numeric), ~ sum(.x, na.rm = TRUE)), .groups = 'drop')
+        summarise(across(where(is.numeric), ~ sum(.x, na.rm = TRUE)), .groups = 'drop') |>
+        
+        # compute query
+        collect()
       
       # cleanup UI
       removeUI(selector = paste0("#", ns("result-content")),
