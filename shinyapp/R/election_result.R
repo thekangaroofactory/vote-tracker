@@ -32,7 +32,9 @@ election_result <- function(id, data){
     div(id = ns("commune-placeholder")),
     
     h3("Résultats"),
-    div(id = ns("result-placeholder"))
+    div(id = ns("result-placeholder")),
+    
+    maplibreOutput(ns("map"))
     
   )
     

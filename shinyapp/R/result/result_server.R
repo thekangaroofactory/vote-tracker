@@ -97,6 +97,17 @@ result_server <- function(id, election) {
                where = "beforeEnd",
                ui = div(id = ns("result-content"), res_commune$votants))
       
+      
+      output$map <- renderMaplibre({
+        maplibre() |> 
+          fit_bounds(contour_sf, animate = TRUE) |> 
+          add_fill_layer(id = "nc_data",
+                         source = contour_sf,
+                         fill_color = "blue",
+                         fill_opacity = 0.25)
+      })
+      
+      
     })
     
     
