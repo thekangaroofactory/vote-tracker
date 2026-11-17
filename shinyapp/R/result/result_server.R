@@ -50,6 +50,18 @@ result_server <- function(id, election) {
     # namespace
     ns <- NS(id)
     
+    # init map
+    output$map <- renderMaplibre({
+      maplibre(bounds = NULL,
+               fitBoundsOptions = list(
+                 padding = list(top = 40, bottom = 40, left = 40, right = 40))) |> 
+        add_fill_layer(id = "contour",
+                       source = st_sf(geometry = st_sfc(crs = 4326)),
+                       fill_color = "#ff8044",
+                       fill_opacity = 0.2)
+    })
+
+        
     # commune search
     observeEvent(input$commune_search, {
 
@@ -109,17 +121,15 @@ result_server <- function(id, election) {
       # get contour
       contour_sf <- st_read(contour_commune(input$select_commune), quiet = TRUE)
       
-      # map
-      output$map <- renderMaplibre({
-        maplibre(bounds = contour_sf,
-                 fitBoundsOptions = list(
-                   padding = list(top = 40, bottom = 40, left = 40, right = 40))) |> 
-          add_fill_layer(id = "nc_data",
-                         source = contour_sf,
-                         fill_color = "blue",
-                         fill_opacity = 0.25)
-      })
-      
+      # update map
+      maplibre_proxy("map") |> 
+        set_source(layer_id = "contour", source = contour_sf) |>
+        fit_bounds(contour_sf, 
+                   animate = TRUE, 
+                   fitBoundsOptions = list(padding = list(top = 40, 
+                                                          bottom = 40, 
+                                                          left = 40, 
+                                                          right = 40)))
       
     })
     
