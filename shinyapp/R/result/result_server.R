@@ -97,7 +97,10 @@ result_server <- function(id, election) {
                where = "beforeEnd",
                ui = div(id = ns("result-content"), res_commune$votants))
       
+      # get contour
+      contour_sf <- st_read(contour_commune(input$select_commune), quiet = TRUE)
       
+      # map
       output$map <- renderMaplibre({
         maplibre() |> 
           fit_bounds(contour_sf, animate = TRUE) |> 
