@@ -44,6 +44,15 @@ result_server <- function(id, election) {
       filter(id_election == election)
     
     
+    # -- result by candidate
+    file_name <- "52a11762-45b4-414f-b6a2-eaa290217dc6"
+    file_ext <- ".parquet"
+    url <- file.path(Sys.getenv("DATA_HOME"), paste0(file_name, file_ext))
+    
+    result_candidate <- arrow::open_dataset(url) |>
+      filter(id_election == election)
+    
+    
     # //////////////////////////////////////////////////////////////////////////
     # Election result
     
@@ -133,6 +142,26 @@ result_server <- function(id, election) {
         fit_bounds(contour_sf, 
                    animate = TRUE, 
                    padding = 40)
+      
+      # candidates
+      res_commune_cand <- result_candidate |>
+        filter(code_commune == input$select_commune) |>
+        collect() |>
+        group_by(no_panneau) |>
+        summarise(voix = sum(voix, na.rm = TRUE),
+                  nom = unique(nom),
+                  prenom = unique(prenom)) |>
+        arrange(desc(voix))
+      
+      # update UI
+      removeUI(selector = paste0("#", ns("candidates-content")),
+               immediate = TRUE)
+      insertUI(selector = paste0("#", ns("candidates-placeholder")),
+               where = "beforeEnd",
+               ui = div(id = ns("candidates-content"), 
+                        apply(res_commune_cand, 
+                              MARGIN = 1, 
+                              FUN = \(x) paste(x[['nom']], x[['prenom']], x[['voix']]), simplify = F)))
       
     })
     

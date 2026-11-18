@@ -34,7 +34,9 @@ election_result <- function(id, data){
     h3("Résultats"),
     div(id = ns("result-placeholder")),
     
-    maplibreOutput(ns("map"))
+    maplibreOutput(ns("map")),
+    
+    div(id = ns("candidates-placeholder"))
     
   )
     
