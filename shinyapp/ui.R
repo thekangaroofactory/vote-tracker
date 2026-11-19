@@ -59,9 +59,12 @@ page_navbar(
                          subtitle = "Visualiser les résultats des éléctions."),
             
             p("L'application présente les résultats des élections françaises à partir des données publiées 
-              par le Ministère de l'Intérieur et des Outre-mer, agrégées sur la plateforme", 
+              par le Ministère de l'Intérieur et des Outre-mer, agrégées par la plateforme", 
               a(href = "https://www.data.gouv.fr/", target = "_blank", "datagouv"), ".", br(),
               "..."),
+            
+            p("Prochaine élection : 1er tour de l'élection présidentielle, dans", 
+              as.numeric(difftime(as.Date("2027/04/18"), Sys.Date(), units = "day")), "jours."),
             
             # dataset
             div(id = "dataset-meta"),
