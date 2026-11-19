@@ -31,6 +31,7 @@ page_navbar(
     
     # CSS
     tags$link(rel = "stylesheet", type = "text/css", href = "./css/vote-tracker.css"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "./css/hero.css"),
     
     # JavaScript
     shinyjs::useShinyjs(),
@@ -49,12 +50,14 @@ page_navbar(
   # ----------------------------------------------------------------------------
   
   # -- Home
-  nav_panel(class = "p-5",
+  nav_panel(class = "vt-tab p-5",
             value = "home",
             title = "Accueil", 
             
             # intro
-            h1("vote", span(class = "text-secondary", "T", .noWS = "outside"), "racker"),
+            hero_section(title = paste0("vote", span(class = "text-secondary", "T", .noWS = "outside"), "racker"),
+                         subtitle = "Visualiser les résultats des éléctions."),
+            
             p("L'application présente les résultats des élections françaises à partir des données publiées 
               par le Ministère de l'Intérieur et des Outre-mer, agrégées sur la plateforme", 
               a(href = "https://www.data.gouv.fr/", target = "_blank", "datagouv"), ".", br(),

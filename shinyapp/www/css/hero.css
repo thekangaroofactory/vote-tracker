@@ -1,0 +1,23 @@
+
+/* the main container */
+.hero-section {
+  
+  background-color: gray;
+  border-radius: 30px;
+  /* height: 125px; */
+  padding: 20px 40px;
+  box-shadow: 2px 2px 5px #00000038;
+  border: solid 1px #bea795;
+  
+  margin-bottom: 50px;
+  
+}
+
+
+.hero-title {
+
+  font-size: 3.5rem;
+  font-weight: 600;
+  letter-spacing: -0.1rem;
+
+}
