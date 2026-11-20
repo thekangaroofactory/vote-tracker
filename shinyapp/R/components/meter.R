@@ -1,7 +1,9 @@
 
-meter <- function(title, min = 0, max = 100, value = 0){
+# The component
+meter <- function(id, title, min = 0, max = 100, value = 0){
 
-  div(class="meter-container",
+  div(id = id,
+      class="meter-container",
       tags$label(class = "meter-label", title),
       
       div(class = "meter-row",
@@ -11,7 +13,12 @@ meter <- function(title, min = 0, max = 100, value = 0){
             `aria-valuenow` = value,
             `aria-valuemin` = min,
             `aria-valuemax` = max,
-            div(id = "my_custom_bar", class = "meter-fill")),
-          span(id = "my_custom_bar_value", class = "meter-value", paste(value, "%"))))
+            div(id = paste0(id, "-bar"), class = "meter-fill")),
+          span(id = paste0(id, "-value"), class = "meter-value", paste(value, "%"))))
   
+}
+
+# The function to update the component
+update_meter <- function(id, value) {
+  session$sendCustomMessage("updateMeter", list(id = id, value = value))
 }

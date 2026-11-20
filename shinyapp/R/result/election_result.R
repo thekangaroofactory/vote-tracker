@@ -27,7 +27,7 @@ election_result <- function(id, title = "", subtitle = ""){
                  close = TRUE,
                  
                  # Overall participation
-                 meter(title = "Participation")),
+                 meter(id = "participation", title = "Participation")),
 
     
     # Filters

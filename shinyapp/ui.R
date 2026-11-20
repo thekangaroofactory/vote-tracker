@@ -33,28 +33,12 @@ page_navbar(
     tags$link(rel = "stylesheet", type = "text/css", href = "./css/vote-tracker.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "./css/hero.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "./css/meter.css"),
-    
     tags$link(rel = "stylesheet", type = "text/css", href = "./css/components.css"),
     
     # JavaScript
     shinyjs::useShinyjs(),
-    
-    
-    # >>>>> HACK
-    tags$script(HTML("
-      Shiny.addCustomMessageHandler('updateProgressBar', function(message) {
-        var bar = document.getElementById(message.id);
-        if (bar) {
-          bar.style.width = message.value + '%';
-          bar.parentElement.setAttribute('aria-valuenow', message.value);
-        }
-        var value = document.getElementById(message.id + '_value');
-        if (value) {
-          value.textContent = message.value + '%';
-        }
-      });
-    "))
-    
+    tags$script(src = "./js/meter.js"),
+
   ),
   
   # -- footer

@@ -53,15 +53,6 @@ result_server <- function(id, election, summary) {
       filter(id_election == election)
     
     
-    # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    # HACK
-    
-    # Helper function to update the bar cleanly
-    update_bar <- function(id, value) {
-      session$sendCustomMessage("updateProgressBar", list(id = id, value = value))
-    }
-    
-    
     # //////////////////////////////////////////////////////////////////////////
     # Election result
     
@@ -70,7 +61,7 @@ result_server <- function(id, election, summary) {
     
     # Update participation after the flush cycle
     session$onFlushed(function() {
-      update_bar("my_custom_bar", summary$ratio_votants_inscrits)
+      update_meter(id = "participation", value = summary$ratio_votants_inscrits)
     }, once = TRUE)
     
     
