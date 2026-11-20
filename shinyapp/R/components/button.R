@@ -1,10 +1,12 @@
 
 
-button <- function(label){
+anime_button <- function(input_id, label){
   
-  actionButton(inputId = "btn_close",
+  actionButton(inputId = input_id,
                class = "btn-anime",
-               label = tagList( # so that text is before icon!
+               
+               # so that text is before icon!
+               label = tagList(
                  span(class = "btn-texte", label),
                  icon("times")))
   

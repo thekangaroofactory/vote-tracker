@@ -57,23 +57,29 @@ function(input, output, session) {
                     html = as.character(tagList(ui)))
       
     } else if(names(input$global_nav) == "id"){
+
+      # election summary
+      e_summary <- summary |> 
+        filter(id_election == input$global_nav$id)
       
-      ui <- election_result(id = "result",
-                            data = summary |>
-                              filter(id_election == input$global_nav$id))
+      # compute ui
+      ui <- election_result(id = "result", title = e_summary$election_title)
       
-      # call module server
-      result_server(id = "result", election = input$global_nav$id)
-      
-      # update ui
+      # insert tab ui
       nav_insert(id = "navbar",
                  nav = nav_panel(title = "Résultats",
                                  value = "result",
-                                 class = "p-5",
+                                 class = "vt-tab p-5",
                                  ui),
                  target = "home",
                  position = "after",
                  select = TRUE)
+      
+      # call module server
+      result_server(id = "result", 
+                    election = input$global_nav$id, 
+                    summary = e_summary)
+      
     }
     
   })

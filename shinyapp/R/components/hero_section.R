@@ -1,6 +1,8 @@
 
 
-hero_section <- function(title, subtitle = NULL, ..., close = FALSE){
+hero_section <- function(title = "", subtitle = "", namespace = NULL, close = FALSE, ...){
+  
+  ns <- NS(namespace)
   
   div(class = "hero-section",
       
@@ -8,11 +10,11 @@ hero_section <- function(title, subtitle = NULL, ..., close = FALSE){
       if(close)
         div(
           class = "hero-btn-right",
-          button("Fermer")),
+          anime_button(input_id = "result_close", label = "Fermer")),
       
       # title & subtitle
-      h1(class = "hero-title", HTML(title)),
-      if(!is.null(subtitle)) p(class = "hero-subtitle", subtitle),
+      h1(id = ns("hero-title"), class = "hero-title", HTML(title)),
+      p(id = ns("hero-subtitle"), class = "hero-subtitle", subtitle),
       
       # other content
       ...

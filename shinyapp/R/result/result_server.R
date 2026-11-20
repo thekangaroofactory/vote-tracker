@@ -1,6 +1,6 @@
 
 
-result_server <- function(id, election) {
+result_server <- function(id, election, summary) {
   moduleServer(id, function(input, output, session) {
     
     # //////////////////////////////////////////////////////////////////////////
@@ -53,27 +53,42 @@ result_server <- function(id, election) {
       filter(id_election == election)
     
     
+    # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    # HACK
+    
+    # Helper function to update the bar cleanly
+    update_bar <- function(id, value) {
+      session$sendCustomMessage("updateProgressBar", list(id = id, value = value))
+    }
+    
+    
     # //////////////////////////////////////////////////////////////////////////
     # Election result
     
     # namespace
     ns <- NS(id)
     
+    # Update participation after the flush cycle
+    session$onFlushed(function() {
+      update_bar("my_custom_bar", summary$ratio_votants_inscrits)
+    }, once = TRUE)
+    
+    
     # init map
-    output$map <- renderMaplibre({
-      maplibre(bounds = c(-5.0, 42.5, 9.56, 51.15),
-               fitBoundsOptions = list(
-                 padding = list(top = 40, bottom = 40, left = 40, right = 40))) |> 
-        add_fill_layer(id = "contour",
-                       source = st_sf(geometry = st_sfc(crs = 4326)),
-                       fill_color = "#ff8044",
-                       fill_opacity = 0.2)
-    })
+    # output$map <- renderMaplibre({
+    #   maplibre(bounds = c(-5.0, 42.5, 9.56, 51.15),
+    #            fitBoundsOptions = list(
+    #              padding = list(top = 40, bottom = 40, left = 40, right = 40))) |> 
+    #     add_fill_layer(id = "contour",
+    #                    source = st_sf(geometry = st_sfc(crs = 4326)),
+    #                    fill_color = "#ff8044",
+    #                    fill_opacity = 0.2)
+    # })
 
         
     # commune search
     observeEvent(input$commune_search, {
-
+      
       # cleanup choices
       removeUI(selector = paste0("#", ns("commune-placeholder"), " > a"),
                multiple = TRUE,
@@ -150,7 +165,8 @@ result_server <- function(id, election) {
         group_by(no_panneau) |>
         summarise(voix = sum(voix, na.rm = TRUE),
                   nom = unique(nom),
-                  prenom = unique(prenom)) |>
+                  prenom = unique(prenom),
+                  libelle_abrege_liste = unique(libelle_abrege_liste)) |>
         arrange(desc(voix))
       
       # update UI
@@ -161,7 +177,7 @@ result_server <- function(id, election) {
                ui = div(id = ns("candidates-content"), 
                         apply(res_commune_cand, 
                               MARGIN = 1, 
-                              FUN = \(x) paste(x[['nom']], x[['prenom']], x[['voix']]), simplify = F)))
+                              FUN = \(x) if(!is.na(x[['nom']])) paste(x[['nom']], x[['prenom']], x[['voix']]) else paste("(Nom manquant)", x[['voix']]), simplify = F)))
       
     })
     

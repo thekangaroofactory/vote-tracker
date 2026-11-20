@@ -12,6 +12,6 @@ meter <- function(title, min = 0, max = 100, value = 0){
             `aria-valuemin` = min,
             `aria-valuemax` = max,
             div(id = "my_custom_bar", class = "meter-fill")),
-          span(class = "meter-value", paste(value, "%"))))
+          span(id = "my_custom_bar_value", class = "meter-value", paste(value, "%"))))
   
 }
