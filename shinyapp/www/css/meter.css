@@ -1,18 +1,43 @@
 
-/* the container */
-.shiny-progress-track {
+
+/* The component container */
+.meter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  width: 300px;
+}
+
+
+/* The component title */
+.meter-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+
+/* The container for the value (track & fill) */
+.meter-row {
+  display: flex;
+  align-items: last baseline;
+  gap: 12px;
+}
+
+
+/* The value (progress) container */
+.meter-track {
   width: 100%;
   height: 10px;
   background-color: #dfdfdf;
   border-radius: 999px;
   overflow: hidden;
-  /*margin: 20px 0;*/
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1),
               2px 2px 5px #654f3e5c;
 }
 
-/* the progress */
-.shiny-progress-fill {
+/* The value (progress) content */
+.meter-fill {
   height: 100%;
   width: 0%;
   background-color: #ff8044;
@@ -44,51 +69,10 @@
 }
 
 
-.shiny-progress-title {
-  
-  font-size: 0.95rem;
-  font-weight: bold;
-  margin-bottom: 5px;
-  
-}
-
-
-.shiny-progress-legend {
-  
-  font-size: 0.8rem;
-  color: #5b5b5b;
-  margin-top: 5px;
-  
-}
-
-
-.progress-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  width: 300px;
-}
-
-.progress-label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #333;
-}
-
-.progress-row {
-  display: flex;
-  align-items: last baseline;
-  gap: 12px;
-}
-
-progress {
-  flex: 1;                /* La barre prend tout l'espace disponible à gauche */
-  height: 14px;
-}
-
-.progress-value {
+/* The value label */
+.meter-value {
   font-size: 0.9rem;
   font-weight: bold;
-  min-width: 40px;        /* Évite que la barre bouge si on passe de 9% à 100% */
+  min-width: 40px;        /* Avoid value to move when nb of digits are different */
   text-align: right;
 }
