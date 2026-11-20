@@ -66,17 +66,18 @@ result_server <- function(id, election, summary) {
     
     
     # init map
-    # output$map <- renderMaplibre({
-    #   maplibre(bounds = c(-5.0, 42.5, 9.56, 51.15),
-    #            fitBoundsOptions = list(
-    #              padding = list(top = 40, bottom = 40, left = 40, right = 40))) |> 
-    #     add_fill_layer(id = "contour",
-    #                    source = st_sf(geometry = st_sfc(crs = 4326)),
-    #                    fill_color = "#ff8044",
-    #                    fill_opacity = 0.2)
-    # })
-
-        
+    output$map <- renderMaplibre({
+      maplibre(center = c( 2.4294, 46.5389),
+               zoom = 4.5,
+               fitBoundsOptions = list(
+                 padding = list(top = 40, bottom = 40, left = 40, right = 40))) |>
+        add_fill_layer(id = "contour",
+                       source = st_sf(geometry = st_sfc(crs = 4326)),
+                       fill_color = "#ff8044",
+                       fill_opacity = 0.2)
+    })
+      
+      
     # commune search
     observeEvent(input$commune_search, {
       
@@ -170,7 +171,7 @@ result_server <- function(id, election, summary) {
                               MARGIN = 1, 
                               FUN = \(x) if(!is.na(x[['nom']])) paste(x[['nom']], x[['prenom']], x[['voix']]) else paste("(Nom manquant)", x[['voix']]), simplify = F)))
       
-    })
+    }, ignoreInit = TRUE)
     
     
     # Return cleanup function for the caller to invoke
