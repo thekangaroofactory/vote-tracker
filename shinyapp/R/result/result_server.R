@@ -77,8 +77,10 @@ result_server <- function(id, election, summary) {
                        fill_opacity = 0.2)
     })
       
-      
+    
+    # //////////////////////////////////////////////////////////////////////////
     # commune search
+    
     observeEvent(input$commune_search, {
       
       # cleanup choices
@@ -86,32 +88,39 @@ result_server <- function(id, election, summary) {
                multiple = TRUE,
                immediate = TRUE)
       
-      # threshold
-      req(nchar(input$commune_search) > 3)
-      
-      # search
+      # search (start with)
       res <- communes |> 
-        filter(grepl(paste0("^", input$commune_search), libelle_commune, ignore.case = TRUE))
+          filter(grepl(paste0("^", input$commune_search), libelle_commune, ignore.case = TRUE))
       
-      # secure from empty search result
-      if(nrow(res))
-        
-        # update choices
-        insertUI(selector = paste0("#", ns("commune-placeholder")),
-                 where = "beforeEnd",
-                 ui = apply(res, 
-                            MARGIN = 1, 
-                            FUN = \(x)
-                            a(href = "#", 
-                              onclick = sprintf("Shiny.setInputValue('%s', '%s', {priority: 'event'});", 
-                                                ns("select_commune"), 
-                                                x[['code_commune']]),
-                              x[['libelle_commune']])))
+      # update count
+      shinyjs::html(selector = paste0("#", ns("search-count")), 
+                    html = paste(nrow(res), "résultats", 
+                                 if(nrow(res) > 10) tooltip(icon("triangle-exclamation"), 
+                                                            "Réduire à 10 maximum en utilisant le champ de recherche.",
+                                                            options = list(customClass = "vt-tip"))
+                                 else icon("circle-check")))
+      
+      # secure against empty or too many results
+      req(nrow(res) && nrow(res) <= 10)
+      
+      # update choices
+      insertUI(selector = paste0("#", ns("commune-placeholder")),
+               where = "beforeEnd",
+               ui = apply(res, 
+                          MARGIN = 1, 
+                          FUN = \(x)
+                          a(href = "#", 
+                            onclick = sprintf("Shiny.setInputValue('%s', '%s', {priority: 'event'});", 
+                                              ns("select_commune"), 
+                                              x[['code_commune']]),
+                            x[['libelle_commune']])))
       
     }, ignoreInit = TRUE)
     
     
+    # //////////////////////////////////////////////////////////////////////////
     # commune select
+    
     observeEvent(input$select_commune, {
       
       # build datamart

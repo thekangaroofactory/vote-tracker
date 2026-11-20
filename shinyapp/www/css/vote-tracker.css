@@ -20,7 +20,77 @@
   padding: 5px 20px;
 }
 
+.form-control{
+  border-radius: 20px;
+}
 
+/* Custom popover */
+.vt-pop{
+  max-width: 600px;
+  background-color: #fff;
+}
+
+.vt-pop .popover-header{
+  background-color: #ff996a;
+}
+
+/* custom tooltip */
+.vt-tip .tooltip-inner{
+  background-color: #fff;
+  color: #000;
+  text-align: left;
+}
+
+
+/* Custom components -------------------------------------------------------- */
+
+/* The search area (in result page) */
+.search-container{
+  
+  position: relative;
+  
+  width: 60%;
+  min-height: 230px;
+  padding: 25px 40px;
+  
+  border-radius: 25px;
+  border: solid 1px #d6c1b0;
+  box-shadow: 2px 2px 5px #9e8878;
+  
+  margin-bottom: 40px;
+
+}
+
+.search-help{
+  
+  position: absolute;
+  top : 20px;
+  right: 25px;
+  
+}
+
+
+.search-area{
+  
+  display: flex;
+  align-items: last baseline;
+  gap: 25px;
+
+}
+
+.search-count{
+  
+  border-radius: 20px;
+  padding: 6px 20px;
+  
+  background-color: #ff996a;
+  color: #000;
+  box-shadow: 2px 2px 5px #9e8878;
+  
+}
+
+
+/* The map container */
 .map {
   border-radius: 25px;
   box-shadow: 0 0 5px gray;
