@@ -1,10 +1,11 @@
 
-/* the main container */
+/* The main container for the hero section */
 .hero-section {
+  
+  position: relative;
   
   background-color: gray;
   border-radius: 30px;
-  /* height: 125px; */
   padding: 20px 40px;
   box-shadow: 2px 2px 5px #00000038;
   border: solid 1px #bea795;
@@ -14,10 +15,17 @@
 }
 
 
+/* The hero section title */
 .hero-title {
-
   font-size: 3.5rem;
   font-weight: 600;
   letter-spacing: -0.1rem;
+}
 
+
+/* The right button */
+.hero-btn-right {
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
