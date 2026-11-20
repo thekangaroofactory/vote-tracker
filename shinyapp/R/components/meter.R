@@ -19,6 +19,6 @@ meter <- function(id, title, min = 0, max = 100, value = 0){
 }
 
 # The function to update the component
-update_meter <- function(id, value) {
+update_meter <- function(id, value, session = shiny::getDefaultReactiveDomain()) {
   session$sendCustomMessage("updateMeter", list(id = id, value = value))
 }
