@@ -31,9 +31,8 @@ election_result <- function(id, title = "", subtitle = ""){
 
     
     # Filters
-    h3("Filtres"),
     textInput(inputId = ns("commune_search"),
-              label = "Commune"),
+              label = "Rechercher une commune :"),
     div(id = ns("commune-placeholder")),
     
     
@@ -41,7 +40,8 @@ election_result <- function(id, title = "", subtitle = ""){
     h3("Résultats"),
     div(id = ns("result-placeholder")),
     
-    maplibreOutput(ns("map")),
+    div(class = "map",
+        maplibreOutput(ns("map"))),
     
     div(id = ns("candidates-placeholder"))
     
