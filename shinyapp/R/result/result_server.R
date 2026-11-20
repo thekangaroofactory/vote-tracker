@@ -109,7 +109,7 @@ result_server <- function(id, election, summary) {
                ui = apply(res, 
                           MARGIN = 1, 
                           FUN = \(x)
-                          a(href = "#", 
+                          a(href = "#results", 
                             onclick = sprintf("Shiny.setInputValue('%s', '%s', {priority: 'event'});", 
                                               ns("select_commune"), 
                                               x[['code_commune']]),

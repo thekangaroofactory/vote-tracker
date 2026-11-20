@@ -57,7 +57,7 @@ election_result <- function(id, title = "", subtitle = ""){
         div(id = ns("commune-placeholder"))),
     
     # Results
-    h3("Résultats"),
+    h3(id = "results", "Résultats"),
     div(id = ns("result-placeholder")),
     
     div(class = "map",
