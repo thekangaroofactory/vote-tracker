@@ -64,8 +64,16 @@ election_result <- function(id, title = "", subtitle = ""){
         class = "map",
         maplibreOutput(ns("map"))),
     
+    # stats
     div(class = "stats-container stats-grid indented", stat_ui(id)),
-    div(id = ns("candidates-placeholder"))
+    
+    # local participation
+    h4(class = "indented", "Participation"),
+    div(class = "indented mt-4",
+        meter(id = ns("local-participation"), title = ""),
+        p(class = "mt-4", id = ns("local-participation-text"))),
+    
+    div(id = ns("candidates-placeholder"), style = "margin-top:40px;")
     
   )
     

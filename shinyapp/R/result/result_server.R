@@ -142,6 +142,15 @@ result_server <- function(id, election, summary) {
       # update stats
       update_stats(values = res_commune)
       
+      # update local participation
+      local_part <- ratio(res_commune$votants, res_commune$inscrits)
+      local_part_diff <- local_part - summary$ratio_votants_inscrits
+      update_meter(id = ns("local-participation"), value = local_part)
+      shinyjs::html(id = "local-participation-text", 
+                    paste("La participation est", sprintf("%.2f", abs(local_part_diff)), ifelse(abs(local_part_diff) < 2, "point", "points"), 
+                          ifelse(local_part_diff >= 0, "supérieure", "inférieure"), 
+                          "à la moyenne nationale pour ce scrutin", paste0("(", summary$ratio_votants_inscrits, "%).")))
+      
       # get contour
       contour_sf <- st_read(contour_commune(input$select_commune), quiet = TRUE)
       

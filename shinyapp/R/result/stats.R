@@ -36,13 +36,13 @@ update_stats <- function(values){
   
   shinyjs::html(id = "inscrits-value", values$inscrits)
   shinyjs::html(id = "votants-value", values$votants)
-  shinyjs::html(id = "votants-label", paste0("Participation : ", round(values$votants/values$inscrits*100, digits = 2), "%"))
+  shinyjs::html(id = "votants-label", paste0("Participation : ", ratio(values$votants, values$inscrits), "%"))
   shinyjs::html(id = "abstentions-value", values$abstentions)
-  shinyjs::html(id = "abstentions-label", paste0(round(values$abstentions/values$inscrits*100, digits = 2), "% des inscrits"))
+  shinyjs::html(id = "abstentions-label", paste0(ratio(values$abstentions, values$inscrits), "% des inscrits"))
   shinyjs::html(id = "nuls-value", values$nuls)
-  shinyjs::html(id = "nuls-label", paste0(round(values$nuls/values$votants*100, digits = 2), "% des votants"))
+  shinyjs::html(id = "nuls-label", paste0(ratio(values$nuls, values$votants), "% des votants"))
   shinyjs::html(id = "blancs-value", values$blancs)
-  shinyjs::html(id = "blancs-label", paste0(round(values$blancs/values$votants*100, digits = 2), "% des votants"))
+  shinyjs::html(id = "blancs-label", paste0(ratio(values$blancs, values$votants), "% des votants"))
   shinyjs::html(id = "exprimes-value", values$exprimes)
 
 }
