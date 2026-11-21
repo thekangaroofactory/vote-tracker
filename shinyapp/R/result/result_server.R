@@ -58,11 +58,6 @@ result_server <- function(id, election, summary) {
     
     # namespace
     ns <- NS(id)
-    
-    # Update participation after the flush cycle
-    session$onFlushed(function() {
-      update_meter(id = ns("participation"), value = summary$ratio_votants_inscrits)
-    }, once = TRUE)
 
     # init map
     output$map <- renderMaplibre({
@@ -75,6 +70,17 @@ result_server <- function(id, election, summary) {
                        fill_color = "#ff8044",
                        fill_opacity = 0.2)
     })
+    
+    # Update participation after the flush cycle
+    session$onFlushed(function() {
+      
+      shinyjs::delay(500, {
+        update_meter(id = ns("participation"), value = summary$ratio_votants_inscrits)
+        shinyjs::addClass(selector = paste0("#", ns("map-container")), class = "is-loaded")})
+      
+    }, once = TRUE)
+
+
       
     
     # //////////////////////////////////////////////////////////////////////////

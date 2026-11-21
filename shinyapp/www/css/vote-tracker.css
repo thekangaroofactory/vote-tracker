@@ -7,7 +7,6 @@
   
 }
 
-
 .footer {
   font-size: 0.9rem;
 }
@@ -42,7 +41,7 @@
 }
 
 
-/* Custom components -------------------------------------------------------- */
+/* Custom search component -------------------------------------------------- */
 
 /* The search area (in result page) */
 .search-container{
@@ -69,7 +68,6 @@
   
 }
 
-
 .search-area{
   
   display: flex;
@@ -90,10 +88,19 @@
 }
 
 
-/* The map container */
+/* Custom map component ----------------------------------------------------- */
+
+/* The container */
 .map {
   border-radius: 25px;
   box-shadow: 0 0 5px gray;
   overflow: hidden;
   margin-bottom: 40px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Once loaded */
+.map.is-loaded {
+  opacity: 1;
 }

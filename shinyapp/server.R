@@ -62,8 +62,9 @@ function(input, output, session) {
       e_summary <- summary |> 
         filter(id_election == input$global_nav$id)
       
-      # generate module id
-      module_id <- as.character(trunc(as.numeric(Sys.time()) * 10))
+      # generate unique module id
+      # note: starts with a char to avoid JS error!
+      module_id <- paste0("k", as.character(trunc(as.numeric(Sys.time()) * 10)))
       
       # compute ui
       ui <- election_result(id = module_id, title = e_summary$election_title)
