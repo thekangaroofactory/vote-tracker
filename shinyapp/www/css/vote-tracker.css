@@ -7,6 +7,11 @@
   
 }
 
+/* To have header aligned with box headers */
+.indented {
+  margin-left: 40px;
+}
+
 .footer {
   font-size: 0.9rem;
 }
@@ -95,7 +100,7 @@
   border-radius: 25px;
   box-shadow: 0 0 5px gray;
   overflow: hidden;
-  margin-bottom: 40px;
+  margin: 40px 0 50px 0;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }

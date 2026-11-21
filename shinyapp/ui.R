@@ -34,6 +34,7 @@ page_navbar(
     tags$link(rel = "stylesheet", type = "text/css", href = "./css/hero.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "./css/meter.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "./css/components.css"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "./css/stats.css"),
     
     # JavaScript
     shinyjs::useShinyjs(),

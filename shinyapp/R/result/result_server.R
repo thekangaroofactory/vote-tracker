@@ -68,7 +68,7 @@ result_server <- function(id, election, summary) {
         add_fill_layer(id = "contour",
                        source = st_sf(geometry = st_sfc(crs = 4326)),
                        fill_color = "#ff8044",
-                       fill_opacity = 0.2)
+                       fill_opacity = 0.25)
     })
     
     # Update participation after the flush cycle
@@ -127,8 +127,8 @@ result_server <- function(id, election, summary) {
     # commune select
     
     observeEvent(input$select_commune, {
-      
-      # build datamart
+  
+      # -- build datamart
       res_commune <- result |>
         filter(code_commune == input$select_commune) |>
         group_by(code_commune) |>
@@ -139,20 +139,8 @@ result_server <- function(id, election, summary) {
         # compute query
         collect()
       
-      # cleanup UI
-      removeUI(selector = paste0("#", ns("result-content")),
-                                 immediate = TRUE)
-      
-      # update UI
-      insertUI(selector = paste0("#", ns("result-placeholder")),
-               where = "beforeEnd",
-               ui = div(id = ns("result-content"), 
-                        "Inscrits :", res_commune$inscrits,
-                        "Votants :", res_commune$votants,
-                        "Abstentions :", res_commune$abstentions,
-                        "Nuls", res_commune$nuls,
-                        "Blancs", res_commune$blancs,
-                        "Exprimés", res_commune$exprimes))
+      # update stats
+      update_stats(values = res_commune)
       
       # get contour
       contour_sf <- st_read(contour_commune(input$select_commune), quiet = TRUE)

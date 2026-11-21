@@ -57,14 +57,14 @@ election_result <- function(id, title = "", subtitle = ""){
         div(id = ns("commune-placeholder"))),
     
     # Results
-    h3(id = "results", "Résultats"),
-    div(id = ns("result-placeholder")),
-
+    h3(id = "results", class = "indented", "Résultats"),
+    
     # Map    
     div(id = ns("map-container"),
         class = "map",
         maplibreOutput(ns("map"))),
     
+    div(class = "stats-container stats-grid indented", stat_ui(id)),
     div(id = ns("candidates-placeholder"))
     
   )
