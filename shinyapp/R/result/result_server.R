@@ -61,10 +61,9 @@ result_server <- function(id, election, summary) {
     
     # Update participation after the flush cycle
     session$onFlushed(function() {
-      update_meter(id = "participation", value = summary$ratio_votants_inscrits)
+      update_meter(id = ns("participation"), value = summary$ratio_votants_inscrits)
     }, once = TRUE)
-    
-    
+
     # init map
     output$map <- renderMaplibre({
       maplibre(center = c( 2.4294, 46.5389),
@@ -115,7 +114,7 @@ result_server <- function(id, election, summary) {
                                               x[['code_commune']]),
                             x[['libelle_commune']])))
       
-    }, ignoreInit = TRUE)
+    })
     
     
     # //////////////////////////////////////////////////////////////////////////

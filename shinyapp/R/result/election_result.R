@@ -27,7 +27,7 @@ election_result <- function(id, title = "", subtitle = ""){
                  close = TRUE,
                  
                  # Overall participation
-                 meter(id = "participation", title = "Participation")),
+                 meter(id = ns("participation"), title = "Participation")),
     
     
     # Search
@@ -50,7 +50,7 @@ election_result <- function(id, title = "", subtitle = ""){
         # search area
         h2("Rechercher"),
         div(class = "search-area",
-          textInput(inputId = ns("commune_search"), label = ""),
+          textInput(inputId = ns("commune_search"), label = "", placeholder = "nom de commune"),
           span(class = "search-count", id = ns("search-count"), "")),
         
         # result area

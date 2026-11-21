@@ -62,8 +62,11 @@ function(input, output, session) {
       e_summary <- summary |> 
         filter(id_election == input$global_nav$id)
       
+      # generate module id
+      module_id <- as.character(trunc(as.numeric(Sys.time()) * 10))
+      
       # compute ui
-      ui <- election_result(id = "result", title = e_summary$election_title)
+      ui <- election_result(id = module_id, title = e_summary$election_title)
       
       # insert tab ui
       nav_insert(id = "navbar",
@@ -76,7 +79,7 @@ function(input, output, session) {
                  select = TRUE)
       
       # call module server
-      result_server(id = "result", 
+      result_server(id = module_id, 
                     election = input$global_nav$id, 
                     summary = e_summary)
       
