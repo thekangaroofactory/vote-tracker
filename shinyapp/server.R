@@ -71,7 +71,7 @@ function(input, output, session) {
       # insert tab ui
       nav_insert(id = "navbar",
                  nav = nav_panel(title = "Résultats",
-                                 value = "result",
+                                 value = module_id,
                                  class = "vt-tab p-5",
                                  ui),
                  target = "home",
@@ -89,14 +89,14 @@ function(input, output, session) {
   
   
   # close result
-  observeEvent(input$result_close, {
+  observeEvent(input$close_tab, {
     
     # drop ui
     nav_remove(id = "navbar",
-               target = "result")
+               target = input$close_tab)
     
     # cleanup module
-    session$destroy("result")
+    session$destroy(input$close_tab)
     
   })
   
