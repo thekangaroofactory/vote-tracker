@@ -67,10 +67,24 @@ page_navbar(
             p("L'application présente les résultats des élections françaises à partir des données publiées 
               par le Ministère de l'Intérieur et des Outre-mer, agrégées par la plateforme", 
               a(href = "https://www.data.gouv.fr/", target = "_blank", "datagouv"), ".", br(),
-              "..."),
+              "Elle n'est affiliée à aucun organisme public ni parti politique. Pour soutenir son développement [xxx]"),
             
-            p("Prochaine élection : 1er tour de l'élection présidentielle, dans", 
-              as.numeric(difftime(as.Date("2027/04/18"), Sys.Date(), units = "day")), "jours."),
+            
+            # -- next election
+            div(class = "box countdown-box",
+
+                # the glow effect!
+                div(class="border-glow-mask",
+                  div(class="border-glow")),
+                
+                # content
+                h2("Prochaine élection"),
+                div(icon("arrow-right"), "1er tour de l'élection présidentielle"), 
+                div(class = "countdown",
+                  div(class = "countdown-value", as.numeric(difftime(as.Date("2027/04/18"), Sys.Date(), units = "day"))),
+                  div(class = "countdown-legend", "jours"))
+                
+            ),
             
             # dataset
             div(id = "dataset-meta"),

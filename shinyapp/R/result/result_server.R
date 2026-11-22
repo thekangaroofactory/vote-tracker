@@ -192,7 +192,7 @@ result_server <- function(id, election, summary) {
                ui = apply(res_commune_cand,
                           MARGIN = 1,
                           FUN = \(x)
-                          cand_row(name = paste(x[['prenom']], x[['nom']]), 
+                          cand_row(name = if(!is.na(x[['nom']])) paste(x[['prenom']], x[['nom']]) else x[['libelle_abrege_liste']], 
                                    voix = x[['voix']], 
                                    ratio = ratio(as.numeric(x[['voix']]), res_commune$exprimes))))
       
