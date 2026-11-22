@@ -40,19 +40,31 @@
 
 /* -------------------------------------------------------------------------- */
 
-.countdown-box {
-  width: 35%;
-  min-height: 230px;
-  margin: 40px auto;
-  animation: 0.4s ease-out 0s 1 slideInFromBtm;
-}
-
 .box {
   position: relative;
   padding: 25px 40px;
   border-radius: 25px;
   border: solid 1px #d6c1b0;
   box-shadow: 2px 2px 5px #9e8878;
+}
+
+.box-fit{
+  position: relative;
+  width: fit-content;
+  padding: 5px 20px;
+  border-radius: 25px;
+  border: solid 1px #d6c1b0;
+  box-shadow: 2px 2px 5px #9e8878;
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+.countdown-box {
+  width: 35%;
+  min-height: 230px;
+  margin: 40px auto;
+  animation: 0.4s ease-out 0s 1 slideInFromBtm;
 }
 
 .countdown {

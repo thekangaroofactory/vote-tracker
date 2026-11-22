@@ -74,18 +74,25 @@ page_navbar(
             div(id = "next-election-placeholder"),
 
             
-            # dataset
-            div(id = "dataset-meta"),
-            div(id = "election-summary-placeholder"),
+            # -- dataset
+            h2(class = "mb-3", "Données"),
+            p("Les données utilisées par l'outil sont mises à jour automatiquement lorsque", tags$em("datagouv"),
+              "publie une nouvelle version.", br(),
+              "Pour en savoir plus sur les sources de données et leur gestion, clicker ici."),
+            div(id = "dataset-meta", class = "box-fit text-sm"),
+            
+            
+            # -- nb elections
+            div(class = "mt-4 mb-3", id = "election-summary-placeholder"),
 
             # by types            
-            h2("Par type"),
+            h2(class = "mb-3", "Par type"),
             div(id = "election-type-placeholder",
                 div(id = "election-type"),
                 div(id = "election-type-content")),
             
             # by year
-            h2("Par année"),
+            h2(class = "mb-3", "Par année"),
             div(id = "election-year-placeholder",
                 div(id = "election-year"),
                 div(id = "election-year-content"))

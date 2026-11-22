@@ -12,6 +12,11 @@
   margin-left: 40px;
 }
 
+.text-sm {
+  font-size: 0.9rem;
+}
+
+
 .footer {
   font-size: 0.9rem;
 }

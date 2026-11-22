@@ -9,7 +9,13 @@ function(input, output, session) {
   # ////////////////////////////////////////////////////////////////////////////
   # Read local files
   
+  # data pipeline
+  last_update <- readRDS(file.path(Sys.getenv("DATA_HOME"), "last_update"))
+  
+  # election
   summary <- readr::read_csv(file = file.path(Sys.getenv("DATA_HOME"), "election_summary.csv"), show_col_types = F)
+  
+  # agenda
   next_election <- readr::read_csv(file = file.path(Sys.getenv("DATA_HOME"), "next_election.csv"), show_col_types = F)
 
     
@@ -17,19 +23,19 @@ function(input, output, session) {
   # Get dataset update
   
   # params
-  base <- "https://www.data.gouv.fr"
-  endpoint <- "api/1/datasets"
-  id <- "6481e741d4cf002ec0efec9d"
-  
-  # build url
-  url <- paste(base, endpoint, id, sep = "/")
-  
-  # call API
-  res <- iker::with_cache(iker::call_api(url, header = list()), encrypt = FALSE)
-  if(res$status_code == 200)
-    dataset_meta <- jsonlite::fromJSON(res$content)
-  else
-    warning("Error while retrieving data from data.gouv API", call. = F)
+  # base <- "https://www.data.gouv.fr"
+  # endpoint <- "api/1/datasets"
+  # id <- "6481e741d4cf002ec0efec9d"
+  # 
+  # # build url
+  # url <- paste(base, endpoint, id, sep = "/")
+  # 
+  # # call API
+  # res <- iker::with_cache(iker::call_api(url, header = list()), encrypt = FALSE)
+  # if(res$status_code == 200)
+  #   dataset_meta <- jsonlite::fromJSON(res$content)
+  # else
+  #   warning("Error while retrieving data from data.gouv API", call. = F)
   
   
   # ////////////////////////////////////////////////////////////////////////////
@@ -116,15 +122,17 @@ function(input, output, session) {
     insertUI(selector = "#next-election-placeholder",
              where = "beforeEnd",
              ui = next_election_ui(incoming))
+
+  # -- dataset: last update
+  shinyjs::html(id = "dataset-meta",
+                sprintf("Dernière mise à jour : %s", last_update))
+
+  
   
   
   # nb of elections
   shinyjs::html(id = "election-summary-placeholder", 
                 sprintf("%s résultats disponibles.", nrow(summary)))
-  
-  # last update
-  shinyjs::html(id = "dataset-meta",
-                sprintf("Mise à jour : %s", dataset_meta$last_update))
   
   # election types
   # cant / dpmt will send two events from the same click
