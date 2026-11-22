@@ -7,11 +7,12 @@
 function(input, output, session) {
   
   # ////////////////////////////////////////////////////////////////////////////
-  # Read election summary
+  # Read local files
   
-  summary <- read.csv(file = file.path(Sys.getenv("DATA_HOME"), "election_summary.csv"))
-  
-  
+  summary <- readr::read_csv(file = file.path(Sys.getenv("DATA_HOME"), "election_summary.csv"), show_col_types = F)
+  next_election <- readr::read_csv(file = file.path(Sys.getenv("DATA_HOME"), "next_election.csv"), show_col_types = F)
+
+    
   # ////////////////////////////////////////////////////////////////////////////
   # Get dataset update
   
@@ -104,6 +105,18 @@ function(input, output, session) {
   
   # ////////////////////////////////////////////////////////////////////////////
   # Update UI
+  
+  # -- next election
+  incoming <- next_election |>
+    filter(date >= Sys.Date()) |>
+    head(n = 1L)
+  
+  # insert UI
+  if(nrow(incoming))
+    insertUI(selector = "#next-election-placeholder",
+             where = "beforeEnd",
+             ui = next_election_ui(incoming))
+  
   
   # nb of elections
   shinyjs::html(id = "election-summary-placeholder", 

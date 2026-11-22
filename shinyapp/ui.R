@@ -60,7 +60,7 @@ page_navbar(
             value = "home",
             title = "Accueil", 
             
-            # intro
+            # -- intro
             hero_section(title = paste0("vote", span(class = "text-secondary", "T", .noWS = "outside"), "racker"),
                          subtitle = "Visualiser les résultats des éléctions."),
             
@@ -71,20 +71,8 @@ page_navbar(
             
             
             # -- next election
-            div(class = "box countdown-box",
+            div(id = "next-election-placeholder"),
 
-                # the glow effect!
-                div(class="border-glow-mask",
-                  div(class="border-glow")),
-                
-                # content
-                h2("Prochaine élection"),
-                div(icon("arrow-right"), "1er tour de l'élection présidentielle"), 
-                div(class = "countdown",
-                  div(class = "countdown-value", as.numeric(difftime(as.Date("2027/04/18"), Sys.Date(), units = "day"))),
-                  div(class = "countdown-legend", "jours"))
-                
-            ),
             
             # dataset
             div(id = "dataset-meta"),
