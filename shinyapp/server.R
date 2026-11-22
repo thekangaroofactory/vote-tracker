@@ -132,13 +132,12 @@ function(input, output, session) {
   
   # nb of elections
   shinyjs::html(id = "election-summary-placeholder", 
-                sprintf("%s résultats disponibles.", nrow(summary)))
+                sprintf("%s résultats de scrutin disponibles.", nrow(summary)))
   
   # election types
   # cant / dpmt will send two events from the same click
   ui <- lapply(unique(summary$election_type_label), 
-               \(x) a(href = "#", 
-                      onclick = sprintf("Shiny.setInputValue('global_nav', {type: '%s'}, {priority: 'event'});", 
+               \(x) a(onclick = sprintf("Shiny.setInputValue('global_nav', {type: '%s'}, {priority: 'event'});", 
                                         x), x))
   
   insertUI(selector = "#election-type", 
@@ -147,8 +146,7 @@ function(input, output, session) {
 
   # election year  
   ui <- lapply(sort(unique(summary$election_year), decreasing = TRUE), 
-               \(x) a(href = "#", 
-                      onclick = sprintf("Shiny.setInputValue('global_nav', {year: %i}, {priority: 'event'});", 
+               \(x) a(onclick = sprintf("Shiny.setInputValue('global_nav', {year: %i}, {priority: 'event'});", 
                                         x), x))
   
   insertUI(selector = "#election-year", 

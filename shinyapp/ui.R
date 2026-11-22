@@ -83,19 +83,26 @@ page_navbar(
             
             
             # -- nb elections
-            div(class = "mt-4 mb-3", id = "election-summary-placeholder"),
+            div(class = "mt-4 mb-3",
+                h2("Résultats"),
+                div(id = "election-summary-placeholder")),
 
-            # by types            
-            h2(class = "mb-3", "Par type"),
-            div(id = "election-type-placeholder",
-                div(id = "election-type"),
-                div(id = "election-type-content")),
-            
-            # by year
-            h2(class = "mb-3", "Par année"),
-            div(id = "election-year-placeholder",
-                div(id = "election-year"),
-                div(id = "election-year-content"))
+            # -- results (columns)
+            div(class = "side-by-side",
+                
+                # left: by types
+                div(
+                  h3(class = "mb-3", "Par type"),
+                  div(id = "election-type-placeholder",
+                      div(id = "election-type", class = "tag-list"),
+                      div(id = "election-type-content"))),
+                
+                # right: by year
+                div(
+                h3(class = "mb-3", "Par année"),
+                div(id = "election-year-placeholder",
+                    div(id = "election-year", class = "tag-list"),
+                    div(id = "election-year-content"))))
             
   ),
   

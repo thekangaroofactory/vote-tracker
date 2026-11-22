@@ -51,6 +51,39 @@
 }
 
 
+/* Custom layouts ----------------------------------------------------------- */
+
+.side-by-side{
+  display: flex;
+  gap: 50px;
+}
+
+
+/* List of tags ------------------------------------------------------------- */
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px 5px;
+  margin-bottom: 10px;
+}
+
+.tag-list a {
+  min-width: 60px; /* to ensure years alignement */
+  border-radius: 20px;
+  padding: 3px 15px 5px;
+  font-size: 0.9rem;
+  text-align: center;
+  border: solid 1px #d3bdac;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tag-list a:hover {
+  background-color: #ff996a;
+}
+
 /* Custom search component -------------------------------------------------- */
 
 /* The search area (in result page) */
