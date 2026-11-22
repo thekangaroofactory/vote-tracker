@@ -41,6 +41,15 @@ function(input, output, session) {
   # ////////////////////////////////////////////////////////////////////////////
   # Navigation
   
+  # switch tab
+  observeEvent(input$switch_tab, {
+    
+    nav_select(id = "navbar",
+               selected = input$switch_tab)
+    
+  })
+  
+  
   # open tab
   observeEvent(input$global_nav, {
 
