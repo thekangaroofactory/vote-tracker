@@ -1,0 +1,61 @@
+
+
+/* The main container */
+.cand-grid {
+  
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  
+}
+
+/* A row containing the candidate performance */
+.cand-row {
+  
+  display: grid;
+  grid-template-columns: 300px auto 150px;
+  /* align-items: center; */
+  gap: 15px;
+  
+}
+
+.cand-row-name {
+  
+  font-size: 1.2rem;
+  margin-bottom: 0;
+  
+}
+
+.cand-row-legend{
+  
+  font-size: 0.9rem;
+  color: rgba(var(--bs-link-color-rgb));
+  margin-top: 5px;
+  font-weight: 600;
+  
+}
+
+.cand-row-value {
+  
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 1px;
+  
+}
+
+.meter-point {
+  
+  width: 10px;
+  height: 100%;
+  border-radius: 10px;
+  background-color: #ff8044;
+  box-shadow: 1px 1px 2px #bea795;
+  border: solid 1px gray;
+  
+}
+
+.slide-in {
+  margin-left: 0px;
+  transition: margin-left 1s ease-out;
+}

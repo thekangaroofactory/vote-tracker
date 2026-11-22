@@ -128,6 +128,16 @@ result_server <- function(id, election, summary) {
     
     observeEvent(input$select_commune, {
   
+      # ////////////////////////////////////////////////////////////////////////
+      # cleanup ui 
+      
+      # candidate rows
+      removeUI(selector = paste0("#", ns("cand-list"), "> div.cand-row"),
+               multiple = TRUE,
+               immediate = TRUE)
+      
+      
+      # ////////////////////////////////////////////////////////////////////////
       # -- build datamart
       res_commune <- result |>
         filter(code_commune == input$select_commune) |>
@@ -161,7 +171,11 @@ result_server <- function(id, election, summary) {
                    animate = TRUE, 
                    padding = 40)
       
-      # candidates
+      
+      # ////////////////////////////////////////////////////////////////////////
+      # Candidates' performance
+      
+      # Select candidates' data
       res_commune_cand <- result_candidate |>
         filter(code_commune == input$select_commune) |>
         collect() |>
@@ -172,15 +186,20 @@ result_server <- function(id, election, summary) {
                   libelle_abrege_liste = unique(libelle_abrege_liste)) |>
         arrange(desc(voix))
       
-      # update UI
-      removeUI(selector = paste0("#", ns("candidates-content")),
-               immediate = TRUE)
-      insertUI(selector = paste0("#", ns("candidates-placeholder")),
+      # replace candidates' performance
+      insertUI(selector = paste0("#", ns("cand-list")),
                where = "beforeEnd",
-               ui = div(id = ns("candidates-content"), 
-                        apply(res_commune_cand, 
-                              MARGIN = 1, 
-                              FUN = \(x) if(!is.na(x[['nom']])) paste(x[['nom']], x[['prenom']], x[['voix']]) else paste("(Nom manquant)", x[['voix']]), simplify = F)))
+               ui = apply(res_commune_cand,
+                          MARGIN = 1,
+                          FUN = \(x)
+                          cand_row(name = paste(x[['prenom']], x[['nom']]), 
+                                   voix = x[['voix']], 
+                                   ratio = ratio(as.numeric(x[['voix']]), res_commune$exprimes))))
+      
+      # trigger JS to observe candidate rows (animate when visible)
+      session$onFlushed(function() {
+        session$sendCustomMessage("observeCandRows", list())
+      }, once = TRUE)
       
     }, ignoreInit = TRUE)
     

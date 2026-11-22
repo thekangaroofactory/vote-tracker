@@ -20,7 +20,7 @@ election_result <- function(id, title = "", subtitle = ""){
   # return ui
   div(
     
-    # Election title
+    # -- Election title
     hero_section(title = title,
                  subtitle = subtitle,
                  namespace = id,
@@ -30,7 +30,7 @@ election_result <- function(id, title = "", subtitle = ""){
                  meter(id = ns("participation"), title = "Participation")),
     
     
-    # Search
+    # -- Search
     div(class = "search-container",
         
         # help
@@ -56,24 +56,26 @@ election_result <- function(id, title = "", subtitle = ""){
         # result area
         div(id = ns("commune-placeholder"))),
     
-    # Results
+    # -- Results
     h3(id = "results", class = "indented", "Résultats"),
     
-    # Map    
+    # Map
     div(id = ns("map-container"),
         class = "map",
         maplibreOutput(ns("map"))),
     
-    # stats
+    # Local stats
     div(class = "stats-container stats-grid indented", stat_ui(id)),
     
-    # local participation
+    # Local participation
     h4(class = "indented", "Participation"),
-    div(class = "indented mt-4",
+    div(class = "indented mt-4 mb-5",
         meter(id = ns("local-participation"), title = ""),
         p(class = "mt-4", id = ns("local-participation-text"))),
     
-    div(id = ns("candidates-placeholder"), style = "margin-top:40px;")
+    # Candidate results
+    h4(class = "indented", "Performance des candidats"),
+    cand_ui(id)
     
   )
     

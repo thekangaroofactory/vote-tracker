@@ -1,6 +1,6 @@
 
 # The component
-meter <- function(id, title, min = 0, max = 100, value = 0){
+meter <- function(id = NULL, title = "", min = 0, max = 100, value = 0){
 
   div(id = id,
       class="meter-container",
