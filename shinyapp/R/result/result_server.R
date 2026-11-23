@@ -178,13 +178,22 @@ result_server <- function(id, election, summary) {
       # Select candidates' data
       res_commune_cand <- result_candidate |>
         filter(code_commune == input$select_commune) |>
+        
+        # collect data otherwise unique() not supported inside Arrow
         collect() |>
-        group_by(no_panneau) |>
+        
+        # Fixed #51
+        # note: no_panneau may be NA, then group by nom instead (but no_panneau is lost)
+        # group_by(no_panneau) |>
+        group_by(groupe = if(anyNA(no_panneau)) nom else no_panneau) |>
         summarise(voix = sum(voix, na.rm = TRUE),
                   nom = unique(nom),
                   prenom = unique(prenom),
                   libelle_abrege_liste = unique(libelle_abrege_liste)) |>
+        
+        # order candidates
         arrange(desc(voix))
+      
       
       # replace candidates' performance
       insertUI(selector = paste0("#", ns("cand-list")),
