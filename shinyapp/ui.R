@@ -149,6 +149,8 @@ page_navbar(
                     h3(class = "mb-3", "Contours"),
                     p("Les contours des communes (affichés sur la carte) sont récupérés via l'API",
                     tags$em(tags$strong("« Découpage Administratif »")), "de", tags$em("datagouv.")),
+                    p("Pour les villes étrangères (ambassades, consulats), une boîte est récupérée depuis l'API",
+                      tags$em(tags$strong("« Nominatim »")), "d'OpenStreetMap."),
                     p("Cette opération est faite à la demande (c'est à dire quand une commune est sélectionnée),",
                       "puis les contours sont conservés dans un cache pour limiter les appels."),
                     a(href = "https://www.data.gouv.fr/dataservices/api-decoupage-administratif-api-geo",

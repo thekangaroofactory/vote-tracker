@@ -31,6 +31,7 @@ result_server <- function(id, election, summary) {
     # columns to load
     colums <- c("id_election",
                 "code_commune",
+                "libelle_commune",
                 "nuls",
                 "blancs",
                 "votants",
@@ -161,9 +162,18 @@ result_server <- function(id, election, summary) {
                           ifelse(local_part_diff >= 0, "supérieure", "inférieure"), 
                           "à la moyenne nationale pour ce scrutin", paste0("(", summary$ratio_votants_inscrits, "%).")))
       
-      # get contour
+      # -- Contour
+      # get contour from API Geo
       dsn <- contour_commune(input$select_commune)
-      contour_sf <- if(!is.null(dsn)) st_read(dsn, quiet = TRUE) else NULL
+      
+      # when not found (404 will return NULL)
+      contour_sf <- if(!is.null(dsn))
+        st_read(dsn, quiet = TRUE) 
+      else 
+        # get bbox from Nominatim instead
+        bbox_commune(name = communes |> 
+                       filter(code_commune == input$select_commune) |>
+                       pull(libelle_commune))
       
       # update map
       maplibre_proxy("map") |> 
