@@ -91,7 +91,6 @@
   background: gray;
   border-radius: 10px;
   padding: 10px;
-  margin-top: 20px;
   overflow: hidden;
   /* width: 200px; */
   margin: 20px auto 0;
@@ -177,7 +176,7 @@
 
   width: 100%;
   max-width: 1100px;
-  margin: 0px auto;
+  margin: 40px auto 0px;
   height: 1px;
   display: inline-block;
   position: relative;

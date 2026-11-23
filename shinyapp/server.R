@@ -145,7 +145,7 @@ function(input, output, session) {
   
   # nb of elections
   shinyjs::html(id = "election-summary-placeholder", 
-                sprintf("%s résultats de scrutin disponibles.", nrow(summary)))
+                sprintf("%s résultats de scrutin sont disponibles.", nrow(summary)))
   
   # election types
   # cant / dpmt will send two events from the same click

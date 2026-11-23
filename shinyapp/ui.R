@@ -67,7 +67,11 @@ page_navbar(
             p("L'application présente les résultats des élections françaises à partir des données publiées 
               par le Ministère de l'Intérieur et des Outre-mer, agrégées par la plateforme", 
               a(href = "https://www.data.gouv.fr/", target = "_blank", "datagouv"), ".", br(),
-              "Elle n'est affiliée à aucun organisme public ni parti politique. Pour soutenir son développement [xxx]"),
+              "Elle n'est affiliée à aucun organisme public ni parti politique."),
+            p("Pour", strong("soutenir"), "son développement, consultez cette", 
+              a(href = "#", 
+                onclick = "Shiny.setInputValue('switch_tab', 'project', {priority: 'event'});",
+                "page.")),
             
             
             # -- next election
@@ -119,8 +123,12 @@ page_navbar(
             hero_section(title = "Données",
                          subtitle = "Sources et gouvernance."),
             
+            # key figure
+            div(class = "text-em",
+              span(class = "countdown text-secondary", "30"), " Millions de lignes"),
             span(class = "loader"),
             
+            # details
             div(class = "side-by-side mt-4",
                 
                 div(class = "box text-sm box-effect",
