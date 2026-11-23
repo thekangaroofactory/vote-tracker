@@ -162,7 +162,8 @@ result_server <- function(id, election, summary) {
                           "à la moyenne nationale pour ce scrutin", paste0("(", summary$ratio_votants_inscrits, "%).")))
       
       # get contour
-      contour_sf <- st_read(contour_commune(input$select_commune), quiet = TRUE)
+      dsn <- contour_commune(input$select_commune)
+      contour_sf <- if(!is.null(dsn)) st_read(dsn, quiet = TRUE) else NULL
       
       # update map
       maplibre_proxy("map") |> 
