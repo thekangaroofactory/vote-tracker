@@ -127,10 +127,14 @@ function(input, output, session) {
     head(n = 1L)
   
   # insert UI
-  if(nrow(incoming))
     insertUI(selector = "#next-election-placeholder",
              where = "beforeEnd",
-             ui = next_election_ui(incoming))
+             ui = if(nrow(incoming))
+               election_sign_ui(incoming)
+             else
+               election_sign_ui(head(next_election, n = 1L), 
+                                  incoming = FALSE))
+    
 
   # -- dataset: last update
   shinyjs::html(id = "dataset-meta",

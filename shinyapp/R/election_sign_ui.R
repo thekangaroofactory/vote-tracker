@@ -1,5 +1,5 @@
 
-next_election_ui <- function(election){
+election_sign_ui <- function(election, incoming = TRUE){
   
   div(class = "box countdown-box",
       
@@ -8,10 +8,10 @@ next_election_ui <- function(election){
           div(class="border-glow")),
       
       # content
-      h2("Prochaine élection"),
+      h2(ifelse(incoming, "Prochaine", "Dernière"), "élection"),
       div(icon("arrow-right"), election$title), 
       div(class = "countdown",
-          div(class = "countdown-value", as.numeric(difftime(election$date, Sys.Date(), units = "day"))),
+          div(class = "countdown-value", abs(as.numeric(difftime(election$date, Sys.Date(), units = "day")))),
           div(class = "countdown-legend", "jours")))
   
 }
