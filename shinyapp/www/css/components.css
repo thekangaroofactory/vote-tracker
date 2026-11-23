@@ -58,6 +58,26 @@
 }
 
 
+/* Flex with hover grow ----------------------------------------------------- */
+
+.box-dyn-item {
+  /* Par défaut, tous les items ont une part égale de 1 */
+  flex: 1;
+  transition: flex 0.5s ease;
+  
+}
+
+/* État initial : le 1er item prend 2 parts sur 4 (soit 50%) */
+.box-dyn-item:first-child {
+  flex: 2;
+}
+
+/* L'item survolé prend 2 parts sur 4 (soit 50%) */
+.box-dyn-item:hover {
+  flex: 2;
+}
+
+
 /* -------------------------------------------------------------------------- */
 
 .countdown-box {
