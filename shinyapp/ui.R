@@ -232,12 +232,21 @@ page_navbar(
                 
                 div(class = "box text-sm",
                     h3(class = "mb-3", "Services"),
-                    p("Des développements ou analyses spécifiques peuvent être effectués sous forme de services facturés.")))
+                    p("Des développements ou analyses spécifiques peuvent être effectués sous forme de services facturés."),
+                    actionButton("xxx", "Contact")))
             
   ),
   
   
   # -- Spacing
-  nav_spacer()
+  nav_spacer(),
+  
+  # linkedin
+  nav_item(
+      a(id = "linkedin",
+        class = "nav-link",
+        href = "https://www.linkedin.com/in/philippeperet/",
+        target = "_blank",
+        icon("linkedin", class = "fa-xl")))
   
 )
