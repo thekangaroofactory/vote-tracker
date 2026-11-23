@@ -16,7 +16,7 @@ bbox_commune <- function(name){
   
   stopifnot(is.character(name))
   
-  # call to Nominatim API
+  # call to Nominatim API (default timeout = 365days)
   res <- kmaps::geocode(name)
   
   # extract bounding box

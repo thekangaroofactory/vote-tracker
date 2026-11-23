@@ -20,9 +20,10 @@ contour_commune <- function(code){
   url <- paste(url, param, sep = "?")
   
   # call API
+  # set timeout = 365 days
   res <- iker::with_cache(
     iker::call_api(url, header = list()),
-    timeout = 24,
+    timeout = 8760,
     encrypt = FALSE)
 
   # return
