@@ -186,11 +186,7 @@ page_navbar(
                     p("Si les données sont ouvertes en accès libre, les applications qui les consomment ont des besoins à financer :"),
                     tags$ul(
                       tags$li("Coûts de développement"),
-                      tags$li("Coûts d'infrastructure"))),
-                
-                div(class = "box box-dyn-item text-sm box-effect",
-                    h3(class = "mb-3", "Financement"),
-                    p("Pour offrir des performances optimales et proposer d'avantage de fonctionalités..."))),
+                      tags$li("Coûts d'infrastructure")))),
             
             h2("Infrastructures"),
             p("A ce stade, le prototype repose sur des infrastructures qui ne permettent pas des performances optimales.", br(),
