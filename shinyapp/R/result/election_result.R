@@ -48,16 +48,16 @@ election_result <- function(id, title = "", subtitle = ""){
                     p("Réduisez le nombre de résultats à 10 maximum pour qu'ils soient affichés."))),
         
         # search area
-        h2("Rechercher"),
+        h4(class = "mb-3 fw-semibold", "Rechercher"),
         div(class = "search-area",
-          textInput(inputId = ns("commune_search"), label = "", placeholder = "nom de commune"),
+          textInput(inputId = ns("commune_search"), label = "", placeholder = "nom de commune (ex: kourou)"),
           span(class = "search-count", id = ns("search-count"), "")),
         
         # result area
         div(id = ns("commune-placeholder"))),
     
     # -- Results
-    h3(id = "results", class = "indented", "Résultats"),
+    h3(id = "results", class = "mb-4 fw-bold indented", "Résultats"),
     
     # Map
     div(id = ns("map-container"),
@@ -68,14 +68,14 @@ election_result <- function(id, title = "", subtitle = ""){
     div(class = "stats-container stats-grid indented", stat_ui(id)),
     
     # Local participation
-    h4(class = "indented", "Participation"),
+    h4(class = "mb-4 fw-bold indented", "Participation"),
     div(class = "indented mt-4 mb-5",
         meter(id = ns("local-participation"), title = ""),
         p(class = "mt-4", id = ns("local-participation-text"))),
     
     # Candidate results
-    h4(class = "indented", "Performance des candidats"),
-    cand_ui(id)
+    h4(class = "mb-4 fw-bold indented", "Performance des candidats"),
+    cand_ui(id),
     
   )
     
