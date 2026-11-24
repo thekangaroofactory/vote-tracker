@@ -80,7 +80,7 @@ page_navbar(
             
             # -- dataset
             h2(class = "mb-3", "Données"),
-            p("Les données utilisées par l'outil sont mises à jour automatiquement lorsque", tags$em("datagouv"),
+            p("Les données utilisées par l'outil sont mises à jour lorsque", tags$em("datagouv"),
               "publie une nouvelle version.", br(),
               "Pour en savoir plus sur les sources de données et leur gestion, clickez",
               a(href = "#", 
@@ -90,8 +90,7 @@ page_navbar(
             
             
             # -- nb elections
-            div(class = "mt-4 mb-3",
-                h2("Résultats"),
+            div(class = "mt-75 mb-60 text-em",
                 div(id = "election-summary-placeholder")),
 
             # -- results (columns)
@@ -173,73 +172,7 @@ page_navbar(
             value = "project",
             title = "Soutenir",
             
-            # -- intro
-            hero_section(title = "Financement",
-                         subtitle = "Soutenir le développement du projet."),
-            
-            div(class = "side-by-side box-dyn-cont mt-4",
-                
-                div(class = "box box-dyn-item text-sm box-effect",
-                    h3(class = "mb-3", "Projet"),
-                    p("L'objectif du projet est — à terme — non seulement de proposer un outil de visualisation mais 
-                  surtout d'analyse des résultats."),
-                    p("Il fait suite à une 1ère version qui a été consultées par +18k visiteurs (dont des équipes de campagne), 
-                    avec un pic d'activité enregistré en Juin 2024 suite à la dissolution de l'Assemblée Nationale. Ce qui démontre 
-                    le besoin pour ce type d'outil afin de naviguer au travers des millions de lignes de données disponibles."),
-                    p("Cette nouvelle version est motivée par la mise à disposition de données agrégées par", tags$em("datagouv"),
-                      "et les nouvelles possibilités d'intéroger la plateforme via ses APIs.")),
-                
-                div(class = "box box-dyn-item text-sm box-effect",
-                    h3(class = "mb-3", "Besoins"),
-                    p("Si les données sont ouvertes en accès libre, les applications qui les consomment ont des besoins à financer :"),
-                    tags$ul(
-                      tags$li("Coûts de développement"),
-                      tags$li("Coûts d'infrastructure")))),
-            
-            h2("Infrastructures"),
-            p("A ce stade, le prototype repose sur des infrastructures qui ne permettent pas des performances optimales.", br(),
-              "Par exemple, [compute time to retrieve communes or specific result & compare with local]"),
-            
-            h3("Exemples de coûts"),
-            tags$ul(
-              tags$li("Nom de domaine : 8 - 10€ HT/an"),
-              tags$li("Hébergement : 20 - 50€ HT/mois")),
-            
-            h2("Fonctionalités"),
-            p("Cette liste, non exhaustive, donne des indications sur les fonctionalités qui peuvent être développées 
-              sur la base de ce prototype."),
-            tags$ul(
-              tags$li("Résultats agrégés au niveau des départements / régions"),
-              tags$li("Résultats agrégés au niveau national"),
-              tags$li("Résultats au niveau des bureaux de vote"),
-              tags$li("Analyse des écarts de performances entre les différents niveaux"),
-              tags$li("Analyse des écarts de performances d'une élection à l'autre"),
-              tags$li("Analyse des écarts de performances entre candidats / listes"),
-              tags$li("Téléchargement de rapports d'analyse"),
-              tags$li("Besoins spécifiques")),
-            p("Les coûts de développement sont très variables et dépendent de la complexité des fonctionalités."),
-            
-            h2("Comment soutenir le projet ?"),
-            p("xxx"),
-            
-            div(class = "side-by-side mt-4",
-                
-                div(class = "box text-sm",
-                    h3(class = "mb-3", "Tips"),
-                    p("Les dons type 'pourboirs' permettent de soutenir les usages ponctuels. 
-                      ex: nom de domaine.")),
-                
-                div(class = "box text-sm",
-                    h3(class = "mb-3", "Sponsors"),
-                    p("Dons sans contre-partie* permettant de financer le développement ouvert du projet."),
-                    p("Sans contre-partie = pas de livrable spécifique au sponsor, sinon il s'agit d'un service.")),
-                
-                div(class = "box text-sm",
-                    h3(class = "mb-3", "Services"),
-                    p("Des développements ou analyses spécifiques peuvent être effectués sous forme de services facturés."),
-                    actionButton("xxx", "Contact")))
-            
-  ),
+            sponsor_test_ui()),
   
   
   # -- Spacing
