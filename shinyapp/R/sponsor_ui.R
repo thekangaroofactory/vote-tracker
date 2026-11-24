@@ -32,8 +32,8 @@ sponsor_ui <- function(){
               p(class = "text-sm", "Si les données sont ouvertes en accès libre, les applications qui les consomment ont des besoins à financer :"),
               tags$ul(
                 class = "text-sm mb-0 ps-3",
-                tags$li(class = "mb-2", "Coûts de développement"),
-                tags$li("Coûts d'infrastructure")))))),
+                tags$li(class = "mb-2", "Coûts de", a(href = "#dev", "développement")),
+                tags$li("Coûts", a(href = "#infra", "d'infrastructure"))))))),
     
     tags$hr(class = "flag my-5"),
     
@@ -52,7 +52,7 @@ sponsor_ui <- function(){
             card_body(
               class = "p-4 d-flex flex-column",
               h3(class = "h4 mb-3 fw-semibold", "Tips"),
-              p(class = "text-sm flex-grow-1", "Les dons type « pourboires » permettent de soutenir les usages ponctuels (ex : nom de domaine)."),
+              p(class = "text-sm flex-grow-1", "Les dons type « pourboires » permettent de soutenir les usages ponctuels."),
               div(class = "mt-3", actionButton("btn_tip", "Faire un don", class = "btn-outline-dark btn-sm")))),
           
           # Sponsors
@@ -61,7 +61,8 @@ sponsor_ui <- function(){
             card_body(
               class = "p-4 d-flex flex-column",
               h3(class = "h4 mb-3 fw-semibold", "Sponsors"),
-              p(class = "text-sm", "Dons sans contrepartie* permettant de financer le développement ouvert du projet."))),
+              p(class = "text-sm", "Dons sans contrepartie* permettant de financer le développement ouvert du projet."),
+              div(class = "mt-3", actionButton("btn_sponsor", "Soutenir", class = "btn-outline-dark btn-sm")))),
           
           # Services
           card(
@@ -70,7 +71,7 @@ sponsor_ui <- function(){
               class = "p-4 d-flex flex-column",
               h3(class = "h4 mb-3 fw-semibold", "Services"),
               p(class = "text-sm flex-grow-1", "Des développements ou analyses spécifiques peuvent être effectués sous forme de services facturés."),
-              div(class = "mt-3", actionButton("xxx", "Contact", class = "btn-dark btn-sm"))))),
+              div(class = "mt-3", actionButton("btn_contact", "Contact", class = "btn-dark btn-sm"))))),
         
         p(class = "text-muted small fst-italic mt-auto mb-0", "*Sans contrepartie = pas de livrable spécifique au sponsor, sinon il s'agit d'un service.")),
     
@@ -85,7 +86,7 @@ sponsor_ui <- function(){
           
           div(
             class = "d-flex flex-column justify-content-center",
-            h2(class = "mb-3 fw-bold", "Infrastructures"),
+            h2(id = "infra", class = "mb-3 fw-bold", "Infrastructures"),
             p(class = "mb-0", "À ce stade, le prototype repose sur des infrastructures qui ne permettent pas une utilisation à grande échelle, ni des performances optimales.")),
           
           card(
@@ -103,7 +104,7 @@ sponsor_ui <- function(){
     
     # -- Section (Features)
     div(class = "mb-4",
-        h2(class = "mb-2 fw-bold", "Fonctionnalités"),
+        h2(id = "dev", class = "mb-2 fw-bold", "Fonctionnalités"),
         p(class = "text-muted mb-4", "Cette liste, non exhaustive, donne des indications sur les fonctionnalités qui peuvent être développées sur la base de ce prototype."),
         
         layout_columns(

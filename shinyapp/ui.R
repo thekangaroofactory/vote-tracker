@@ -172,7 +172,7 @@ page_navbar(
             value = "project",
             title = "Soutenir",
             
-            sponsor_test_ui()),
+            sponsor_ui()),
   
   
   # -- Spacing
