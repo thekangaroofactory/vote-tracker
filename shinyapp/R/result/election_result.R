@@ -31,7 +31,7 @@ election_result <- function(id, title = "", subtitle = ""){
     
     
     # -- Search
-    div(class = "search-container",
+    div(class = "search-container box-effect",
         
         # help
         div(class = "search-help", 

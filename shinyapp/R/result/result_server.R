@@ -3,8 +3,11 @@
 result_server <- function(id, election, summary) {
   moduleServer(id, function(input, output, session) {
     
+    # namespace
+    ns <- NS(id)
+    
     # //////////////////////////////////////////////////////////////////////////
-    # Before calling the module
+    # Load commune (search)
     
     # prepare
     file_name <- "election_communes"
@@ -21,9 +24,12 @@ result_server <- function(id, election, summary) {
       select(all_of(colums)) |> 
       filter(id_election == election) |>
       collect()
-    
 
-    # read data
+    
+    # //////////////////////////////////////////////////////////////////////////
+    # Dataset results (general)
+
+    # prepare
     file_name <- "b8703c69-a18f-46ab-9e7f-3a8368dcb891"
     file_ext <- ".parquet"
     url <- file.path(Sys.getenv("DATA_HOME"), paste0(file_name, file_ext))
@@ -39,28 +45,29 @@ result_server <- function(id, election, summary) {
                 "inscrits",
                 "abstentions")
     
-    # read data
+    # define dataset
     result <- arrow::open_dataset(url) |>
       select(all_of(colums)) |>
       filter(id_election == election)
     
     
-    # -- result by candidate
+    # //////////////////////////////////////////////////////////////////////////
+    # Dataset results (candidates)
+    
+    # prepare
     file_name <- "52a11762-45b4-414f-b6a2-eaa290217dc6"
     file_ext <- ".parquet"
     url <- file.path(Sys.getenv("DATA_HOME"), paste0(file_name, file_ext))
     
+    # define dataset
     result_candidate <- arrow::open_dataset(url) |>
       filter(id_election == election)
     
     
     # //////////////////////////////////////////////////////////////////////////
-    # Election result
-    
-    # namespace
-    ns <- NS(id)
+    # Init page
 
-    # init map
+    # map
     output$map <- renderMaplibre({
       maplibre(center = c( 2.4294, 46.5389),
                zoom = 4.5,
@@ -73,6 +80,7 @@ result_server <- function(id, election, summary) {
     })
     
     # Update participation after the flush cycle
+    # this to avoid map blink
     session$onFlushed(function() {
       
       shinyjs::delay(500, {
@@ -80,8 +88,6 @@ result_server <- function(id, election, summary) {
         shinyjs::addClass(selector = paste0("#", ns("map-container")), class = "is-loaded")})
       
     }, once = TRUE)
-
-
       
     
     # //////////////////////////////////////////////////////////////////////////
@@ -130,7 +136,7 @@ result_server <- function(id, election, summary) {
     observeEvent(input$select_commune, {
   
       # ////////////////////////////////////////////////////////////////////////
-      # cleanup ui 
+      # -- cleanup ui 
       
       # candidate rows
       removeUI(selector = paste0("#", ns("cand-list"), "> div.cand-row"),
@@ -162,7 +168,9 @@ result_server <- function(id, election, summary) {
                           ifelse(local_part_diff >= 0, "supérieure", "inférieure"), 
                           "à la moyenne nationale pour ce scrutin", paste0("(", summary$ratio_votants_inscrits, "%).")))
       
+      # ////////////////////////////////////////////////////////////////////////
       # -- Contour
+      
       # get contour from API Geo
       dsn <- contour_commune(input$select_commune)
       
@@ -184,7 +192,7 @@ result_server <- function(id, election, summary) {
       
       
       # ////////////////////////////////////////////////////////////////////////
-      # Candidates' performance
+      # -- Candidates' performance
       
       # Select candidates' data
       res_commune_cand <- result_candidate |>
