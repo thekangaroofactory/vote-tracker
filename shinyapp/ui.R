@@ -36,11 +36,17 @@ page_navbar(
     tags$link(rel = "stylesheet", type = "text/css", href = "./css/components.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "./css/stats.css"),
     tags$link(rel = "stylesheet", type = "text/css", href = "./css/candidates.css"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "./css/custom_modal.css"),
     
     # JavaScript
     shinyjs::useShinyjs(),
     tags$script(src = "./js/meter.js"),
     tags$script(src = "./js/candidates.js"),
+    tags$script(src = "./js/custom_modal.js"),
+    
+    # -- implement modal window
+    # so that it's available across the app
+    custom_modal()
 
   ),
   

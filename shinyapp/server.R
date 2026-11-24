@@ -167,4 +167,33 @@ function(input, output, session) {
            where = "beforeEnd", 
            ui)
   
+  
+  # ////////////////////////////////////////////////////////////////////////////
+  # Legal notice
+  
+  observeEvent(input$legal_notice, {
+    
+    # display modal
+    custom_modal_show(
+      div(
+        class = "legal-notice",
+        
+        h4(class = "h4 mb-3 fw-semibold", "Propriétaire"),
+        p("Le site ainsi que l'application sont la propriété de :"),
+        tags$ul(
+          tags$li("Entreprise : Philippe PERET EI"),
+          tags$li("SIREN : 909 200 925"),
+          tags$li("Email : philippe.peret@hotmail.com")),
+        
+        h4(class = "h4 mb-3 fw-semibold", "Hébergement"),
+        p("L'application est hébergée par Posit Software, PBC |", br(),
+          a(href = "https://connect.posit.cloud/", target = "_blank", "https://connect.posit.cloud/")),
+        
+        h4(class = "h4 mb-3 fw-semibold", "Editorial & Développements"),
+        p("Philippe PERET EI"),
+        
+        tags$em("Aucune donnée n'est collectée lors de l'utilisation.")))
+    
+  })
+  
 }
