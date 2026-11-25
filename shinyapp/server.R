@@ -169,6 +169,29 @@ function(input, output, session) {
   
   
   # ////////////////////////////////////////////////////////////////////////////
+  # Contact
+  
+  observeEvent(input$btn_contact, {
+  
+    # display modal
+    custom_modal_show(
+      div(class = "legal-notice",
+        h4(class = "h4 mt-3 mb-3 fw-semibold", "Contacts"),
+        p("Pour soutenir le projet ou obtenir des informations, n'hésitez pas à me contacter :"),
+        a(class = "btn btn-default btn-secondary btn-sm", href="mailto:philippe.peret@hotmail.com", "email"),
+        p(class = "mt-3 text-muted text-sm", tags$em("Si besoin, faites un click droit sur le bouton pour copier l'adresse.")),
+        
+        p(class = "mt-4", "Vous pouvez également suivre mon travail :"),
+        a(id = "linkedin",
+          class = "nav-link",
+          href = "https://www.linkedin.com/in/philippeperet/",
+          target = "_blank",
+          icon("linkedin", class = "fa-xl"))))
+    
+  })
+  
+  
+  # ////////////////////////////////////////////////////////////////////////////
   # Legal notice
   
   observeEvent(input$legal_notice, {

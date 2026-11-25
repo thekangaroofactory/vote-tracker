@@ -42,6 +42,9 @@ sponsor_ui <- function(){
     div(class = "mb-5",
         h2(class = "mb-4 fw-bold", "Comment soutenir le projet ?"),
         
+        p(class = "mb-4", "Pour passer du stade de prototype / démonstrateur à celui d'application à part entière, le projet doit trouver 
+          des sources de financements."),
+        
         layout_columns(
           col_widths = c(4, 4, 4),
           gap = "1.5rem",
@@ -53,7 +56,7 @@ sponsor_ui <- function(){
               class = "p-4 d-flex flex-column",
               h3(class = "h4 mb-3 fw-semibold", "Tips"),
               p(class = "text-sm flex-grow-1", "Les dons type « pourboires » permettent de soutenir les usages ponctuels."),
-              div(class = "mt-3", actionButton("btn_tip", "Faire un don", class = "btn-outline-dark btn-sm")))),
+              div(class = "mt-3", actionButton("btn_tip", "A venir", class = "btn-outline-dark btn-sm")))),
           
           # Sponsors
           card(
@@ -62,7 +65,7 @@ sponsor_ui <- function(){
               class = "p-4 d-flex flex-column",
               h3(class = "h4 mb-3 fw-semibold", "Sponsors"),
               p(class = "text-sm", "Dons sans contrepartie* permettant de financer le développement ouvert du projet."),
-              div(class = "mt-3", actionButton("btn_sponsor", "Soutenir", class = "btn-outline-dark btn-sm")))),
+              div(class = "mt-3", actionButton("btn_sponsor", "A venir", class = "btn-outline-dark btn-sm")))),
           
           # Services
           card(
@@ -71,7 +74,7 @@ sponsor_ui <- function(){
               class = "p-4 d-flex flex-column",
               h3(class = "h4 mb-3 fw-semibold", "Services"),
               p(class = "text-sm flex-grow-1", "Des développements ou analyses spécifiques peuvent être effectués sous forme de services facturés."),
-              div(class = "mt-3", actionButton("btn_contact", "Contact", class = "btn-dark btn-sm"))))),
+              div(class = "mt-3", actionButton("btn_contact", "Contact", class = "btn-secondary btn-sm"))))),
         
         p(class = "text-muted small fst-italic mt-auto mb-0", "*Sans contrepartie = pas de livrable spécifique au sponsor, sinon il s'agit d'un service.")),
     
@@ -105,7 +108,7 @@ sponsor_ui <- function(){
     # -- Section (Features)
     div(class = "mb-4",
         h2(id = "dev", class = "mb-2 fw-bold", "Fonctionnalités"),
-        p(class = "text-muted mb-4", "Cette liste, non exhaustive, donne des indications sur les fonctionnalités qui peuvent être développées sur la base de ce prototype."),
+        p(class = "mb-4", "Cette liste, non exhaustive, donne des indications sur les fonctionnalités qui peuvent être développées."),
         
         layout_columns(
           col_widths = c(4, 4, 4),
