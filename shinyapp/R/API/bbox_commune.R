@@ -31,8 +31,8 @@ bbox_commune <- function(name){
     ymax = raw_coords[2])
   
   # return bounding box as sf object
-  st_bbox(bbox_vec, crs = 4326) |>
-    st_as_sfc() |>
-    st_sf()
+  sf::st_bbox(bbox_vec, crs = 4326) |>
+    sf::st_as_sfc() |>
+    sf::st_sf()
   
 }

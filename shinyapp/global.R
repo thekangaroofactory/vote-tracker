@@ -5,8 +5,9 @@ library(shiny)
 library(bslib)
 library(dplyr)
 
-library(mapgl)
-library(sf)
+# -- called with ::
+# library(mapgl)
+# library(sf)
 
 # -- source code
 ktools::source_code("./R")

@@ -66,17 +66,17 @@ result_server <- function(id, election, summary) {
     
     # //////////////////////////////////////////////////////////////////////////
     # Init page
-
+    
     # map
-    output$map <- renderMaplibre({
-      maplibre(center = c( 2.4294, 46.5389),
-               zoom = 4.5,
-               fitBoundsOptions = list(
-                 padding = list(top = 40, bottom = 40, left = 40, right = 40))) |>
-        add_fill_layer(id = "contour",
-                       source = st_sf(geometry = st_sfc(crs = 4326)),
-                       fill_color = "#ff8044",
-                       fill_opacity = 0.25)
+    output$map <- mapgl::renderMaplibre({
+      mapgl::maplibre(center = c( 2.4294, 46.5389),
+                      zoom = 4.5,
+                      fitBoundsOptions = list(
+                        padding = list(top = 40, bottom = 40, left = 40, right = 40))) |>
+        mapgl::add_fill_layer(id = "contour",
+                              source = sf::st_sf(geometry = sf::st_sfc(crs = 4326)),
+                              fill_color = "#ff8044",
+                              fill_opacity = 0.25)
     })
     
     # Update participation after the flush cycle
@@ -176,7 +176,7 @@ result_server <- function(id, election, summary) {
       
       # when not found (404 will return NULL)
       contour_sf <- if(!is.null(dsn))
-        st_read(dsn, quiet = TRUE) 
+        sf::st_read(dsn, quiet = TRUE) 
       else 
         # get bbox from Nominatim instead
         bbox_commune(name = communes |> 
@@ -184,11 +184,11 @@ result_server <- function(id, election, summary) {
                        pull(libelle_commune))
       
       # update map
-      maplibre_proxy("map") |> 
-        set_source(layer_id = "contour", source = contour_sf) |>
-        fit_bounds(contour_sf, 
-                   animate = TRUE, 
-                   padding = 40)
+      mapgl::maplibre_proxy("map") |> 
+        mapgl::set_source(layer_id = "contour", source = contour_sf) |>
+        mapgl::fit_bounds(contour_sf, 
+                          animate = TRUE, 
+                          padding = 40)
       
       
       # ////////////////////////////////////////////////////////////////////////

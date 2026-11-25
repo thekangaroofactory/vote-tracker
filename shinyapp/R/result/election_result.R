@@ -62,7 +62,7 @@ election_result <- function(id, title = "", subtitle = ""){
     # Map
     div(id = ns("map-container"),
         class = "map",
-        maplibreOutput(ns("map"))),
+        mapgl::maplibreOutput(ns("map"))),
     
     # Local stats
     div(class = "stats-container stats-grid indented", stat_ui(id)),
