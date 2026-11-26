@@ -30,9 +30,9 @@ result_server <- function(id, election, summary) {
     # Dataset results (general)
 
     # prepare
-    file_name <- "b8703c69-a18f-46ab-9e7f-3a8368dcb891"
-    file_ext <- ".parquet"
-    url <- file.path(Sys.getenv("DATA_HOME"), paste0(file_name, file_ext))
+    # file_name <- "b8703c69-a18f-46ab-9e7f-3a8368dcb891"
+    # file_ext <- ".parquet"
+    uri <- file.path(Sys.getenv("DATA_HOME"), "raw", "general")
     
     # columns to load
     colums <- c("id_election",
@@ -46,7 +46,7 @@ result_server <- function(id, election, summary) {
                 "abstentions")
     
     # define dataset
-    result <- arrow::open_dataset(url) |>
+    result <- arrow::open_dataset(uri) |>
       select(all_of(colums)) |>
       filter(id_election == election)
     
@@ -55,14 +55,14 @@ result_server <- function(id, election, summary) {
     # Dataset results (candidates)
     
     # prepare
-    file_name <- "52a11762-45b4-414f-b6a2-eaa290217dc6"
-    file_ext <- ".parquet"
-    url <- file.path(Sys.getenv("DATA_HOME"), paste0(file_name, file_ext))
+    # file_name <- "52a11762-45b4-414f-b6a2-eaa290217dc6"
+    # file_ext <- ".parquet"
+    uri <- file.path(Sys.getenv("DATA_HOME"), "raw", "candidate")
     
     # define dataset
-    result_candidate <- arrow::open_dataset(url) |>
+    result_candidate <- arrow::open_dataset(uri) |>
       filter(id_election == election)
-    
+
     
     # //////////////////////////////////////////////////////////////////////////
     # Init page
