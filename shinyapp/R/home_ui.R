@@ -55,14 +55,14 @@ home_ui <- function(){
           h4(class = "mb-4 fw-bold", "Par type"),
           div(id = "election-type-placeholder",
               div(id = "election-type", class = "tag-list"),
-              div(id = "election-type-content"))),
+              div(id = "election-type-content", class = "election-list"))),
         
         # right: by year
         div(
           h4(class = "mb-4 fw-bold", "Par année"),
           div(id = "election-year-placeholder",
               div(id = "election-year", class = "tag-list"),
-              div(id = "election-year-content"))))
+              div(id = "election-year-content", class = "election-list"))))
     
   )
   

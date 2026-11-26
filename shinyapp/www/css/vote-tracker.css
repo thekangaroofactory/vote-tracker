@@ -99,6 +99,28 @@
   background-color: #ff996a;
 }
 
+
+/* List of election links --------------------------------------------------- */
+
+.election-list {
+  
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  
+}
+
+.election-list a {
+  
+  background-color: #d1c1b4;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 0.95rem;
+  box-shadow: 0px 0px 2px #9e8878;
+  
+}
+
+
 /* Custom search component -------------------------------------------------- */
 
 /* The search area (in result page) */
