@@ -9,33 +9,14 @@ function(input, output, session) {
   # ////////////////////////////////////////////////////////////////////////////
   # Read local files
   
-  # data pipeline
+  # dataset update
   last_update <- readRDS(file.path(Sys.getenv("DATA_HOME"), "last_update"))
   
-  # election
+  # election summary
   summary <- readr::read_csv(file = file.path(Sys.getenv("DATA_HOME"), "election_summary.csv"), show_col_types = F)
   
   # agenda
   next_election <- readr::read_csv(file = file.path(Sys.getenv("DATA_HOME"), "next_election.csv"), show_col_types = F)
-
-    
-  # ////////////////////////////////////////////////////////////////////////////
-  # Get dataset update
-  
-  # params
-  # base <- "https://www.data.gouv.fr"
-  # endpoint <- "api/1/datasets"
-  # id <- "6481e741d4cf002ec0efec9d"
-  # 
-  # # build url
-  # url <- paste(base, endpoint, id, sep = "/")
-  # 
-  # # call API
-  # res <- iker::with_cache(iker::call_api(url, header = list()), encrypt = FALSE)
-  # if(res$status_code == 200)
-  #   dataset_meta <- jsonlite::fromJSON(res$content)
-  # else
-  #   warning("Error while retrieving data from data.gouv API", call. = F)
   
   
   # ////////////////////////////////////////////////////////////////////////////
@@ -140,15 +121,12 @@ function(input, output, session) {
   shinyjs::html(id = "dataset-meta",
                 sprintf("Dernière mise à jour : %s", last_update))
 
-  
-  
-  
-  # nb of elections
+  # -- nb of elections
   shinyjs::html(id = "election-summary-placeholder", 
                 as.character(div(span(class = "countdown text-secondary", nrow(summary)), " résultats disponibles")))
   
   
-  # election types
+  # -- by types
   # cant / dpmt will send two events from the same click
   ui <- lapply(unique(summary$election_type_label), 
                \(x) a(onclick = sprintf("Shiny.setInputValue('global_nav', {type: '%s'}, {priority: 'event'});", 
@@ -158,7 +136,7 @@ function(input, output, session) {
            where = "beforeEnd", 
            ui)
 
-  # election year  
+  # -- by year  
   ui <- lapply(sort(unique(summary$election_year), decreasing = TRUE), 
                \(x) a(onclick = sprintf("Shiny.setInputValue('global_nav', {year: %i}, {priority: 'event'});", 
                                         x), x))
