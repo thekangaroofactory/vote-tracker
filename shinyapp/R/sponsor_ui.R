@@ -20,7 +20,7 @@ sponsor_ui <- function(){
           div(
             h2(class = "mb-3 fw-bold", "Projet"),
             p("L'objectif du projet est — ", tags$em("à terme"), " — non seulement de proposer un outil de visualisation mais surtout d'analyse des résultats."),
-            p("Il fait suite à une 1ère version qui a été consultée par ", strong("+18k visiteurs"), " (dont des équipes de campagne), avec un pic d'activité enregistré en Juin 2024 suite à la dissolution de l'Assemblée Nationale. Ceci démontre le besoin pour ce type d'outil afin de naviguer au travers des millions de lignes de données disponibles."),
+            p("Il fait suite à une 1ère version qui a été consultée par ", strong("+19k visiteurs"), " (dont des équipes de campagne), avec un pic d'activité enregistré en Juin 2024 suite à la dissolution de l'Assemblée Nationale. Ceci démontre le besoin pour ce type d'outil afin de naviguer au travers des millions de lignes de données disponibles."),
             p(class = "mb-0", "Cette nouvelle version est motivée par la mise à disposition de données agrégées par ", tags$em("datagouv"), " et les nouvelles possibilités d'interroger la plateforme via ses APIs.")),
           
           # Right: box
