@@ -200,12 +200,15 @@ result_server <- function(id, election, summary) {
         
         # collect data otherwise unique() not supported inside Arrow
         collect() |>
-        
+      
         # Fixed #51
         # note: no_panneau may be NA, then group by nom instead (but no_panneau is lost)
         # group_by(no_panneau) |>
-        group_by(groupe = if(anyNA(no_panneau)) nom else no_panneau) |>
+        # Fixed #70 | extend above solution
+        # group_by(groupe = if(anyNA(no_panneau)) nom else no_panneau) |>
+        group_by(across(c(no_panneau, nom, libelle_abrege_liste) & where(~ !any(is.na(.x))))) |> 
         summarise(voix = sum(voix, na.rm = TRUE),
+                  no_panneau = unique(no_panneau),
                   nom = unique(nom),
                   prenom = unique(prenom),
                   libelle_abrege_liste = unique(libelle_abrege_liste)) |>
