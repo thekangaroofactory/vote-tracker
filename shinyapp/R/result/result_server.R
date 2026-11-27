@@ -211,7 +211,8 @@ result_server <- function(id, election, summary) {
                   no_panneau = unique(no_panneau),
                   nom = unique(nom),
                   prenom = unique(prenom),
-                  libelle_abrege_liste = unique(libelle_abrege_liste)) |>
+                  libelle_abrege_liste = unique(libelle_abrege_liste),
+                  .groups = "drop") |>
         
         # order candidates
         arrange(desc(voix))
