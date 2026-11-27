@@ -195,6 +195,33 @@
 }
 
 
+/* The top loader ----------------------------------------------------------- */
+
+.top-loader {
+  
+  --bleu-france: #002654;
+  --blanc-france: #ffffff;
+  --rouge-france: #ed2939;
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(
+    90deg, 
+    transparent 0%, 
+    var(--bleu-france) 34%, 
+    var(--blanc-france) 35%, 
+    var(--blanc-france) 66%, 
+    var(--rouge-france) 67%, 
+    transparent 100% 
+  );
+  z-index: 9999;
+  transition: width 0.5s ease-in-out;
+}
+
+
 /* The loader animation ----------------------------------------------------- */
 
 .loader {

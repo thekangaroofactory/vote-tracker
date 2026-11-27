@@ -55,6 +55,9 @@ function(input, output, session) {
       
     } else if(names(input$global_nav) == "id"){
 
+      # Set progress
+      update_loader(10)
+      
       # election summary
       e_summary <- summary |> 
         filter(id_election == input$global_nav$id)
@@ -63,8 +66,14 @@ function(input, output, session) {
       # note: starts with a char to avoid JS error!
       module_id <- paste0("k", as.character(trunc(as.numeric(Sys.time()) * 10)))
       
+      # Update progress
+      update_loader(20)
+      
       # compute ui
       ui <- election_result(id = module_id, title = e_summary$election_title)
+      
+      # Update progress
+      update_loader(50)
       
       # insert tab ui
       nav_insert(id = "navbar",
@@ -76,10 +85,16 @@ function(input, output, session) {
                  position = "after",
                  select = TRUE)
       
+      # Update progress
+      update_loader(70)
+      
       # call module server
       result_server(id = module_id, 
                     election = input$global_nav$id, 
                     summary = e_summary)
+      
+      # Update progress
+      update_loader(100)
       
     }
     
@@ -196,5 +211,16 @@ function(input, output, session) {
         tags$em("Aucune donnée n'est collectée lors de l'utilisation.")))
     
   })
+  
+  
+  # ////////////////////////////////////////////////////////////////////////////
+  # Pre loader
+  # 
+  
+  session$onFlushed(function() {
+    
+    ui <- election_result(id = "foo")
+    
+  }, once = TRUE)
   
 }
