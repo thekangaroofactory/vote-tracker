@@ -43,11 +43,15 @@ page_navbar(
     tags$script(src = "./js/meter.js"),
     tags$script(src = "./js/candidates.js"),
     tags$script(src = "./js/custom_modal.js"),
+    tags$script(src = "./js/loader.js"),
     
     # -- implement modal window
     # so that it's available across the app
-    custom_modal()
+    custom_modal(),
 
+    # the top loader
+    div(class="top-loader")
+    
   ),
   
   # -- footer
